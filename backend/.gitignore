@@ -1,0 +1,5 @@
+# Secured files and directories
+.env
+
+#large files
+node_modules
