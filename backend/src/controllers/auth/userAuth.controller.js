@@ -186,3 +186,49 @@ export const verifyOtp = async (req, res) => {
     });
   }
 };
+
+export const resentOtp = async (req, res) => {
+  try {
+    const normalizedEmail = req.body.email?.toLowerCase();
+    if (!normalizedEmail) {
+      return res.status(400).json({ message: "Email is required" });
+    }
+
+    const client = await getRedisClient();
+
+    const signupData = await client.get(`signup:${normalizedEmail}`);
+    if (!signupData) {
+      return res.status(400).json({
+        message: "Signup session expired",
+      });
+    }
+
+    const cooldown = await client.get(`resend:${normalizedEmail}`);
+    if (cooldown) {
+      return res.status(429).json({
+        message: "Please wait 60 seconds before requesting another OTP.",
+      });
+    }
+
+    const otp = Math.floor(100000 + Math.random() * 900000).toString();
+    const hashedOtp = await bcrypt.hash(otp, 10);
+
+    await client.set(`otp:${normalizedEmail}`, hashedOtp, {
+      EX: 300,
+    });
+
+    await client.set(`resend:${normalizedEmail}`, "true", {
+      EX: 60,
+    });
+
+    await sendOtpEmail(normalizedEmail, otp);
+
+    return res.status(200).json({
+      message: "OTP resent successfully",
+    });
+  } catch (error) {
+    return res.status(500).json({
+      message: error.message,
+    });
+  }
+};
