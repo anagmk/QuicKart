@@ -89,8 +89,12 @@ if (!form) {
                 referredBy: referral || undefined,
             };
 
+            const API = window.location.hostname === "localhost"
+                ? "http://localhost:3000"
+                : "https://quickkart-api.onrender.com";
+
             const response = await fetch(
-                "http://localhost:3000/user/signup",
+                `${API}/user/signup`,
                 {
                     method: "POST",
                     headers: {
@@ -111,7 +115,7 @@ if (!form) {
             alert(data.message || "Signup successful");
 
             sessionStorage.setItem("signupEmail", userData.email);
-            window.location.href = "/user/verify-otp";
+            window.location.href = window.location.hostname === "localhost" ? "/user/verify-otp" : "/verify-otp";
         } catch (error) {
             console.log(error);
             alert("Server Error");

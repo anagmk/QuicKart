@@ -7,7 +7,7 @@ const confirmPasswordInput = document.getElementById("confirmPassword");
 const message = document.getElementById("formMessage");
 
 if (!email || sessionStorage.getItem("otpFlow") !== "reset-password") {
-  window.location.replace("/forgot-password");
+  window.location.replace(window.location.hostname === "localhost" ? "/forgot-password" : "/forgot-password");
 }
 
 function showMessage(text, isError = true) {
@@ -23,7 +23,10 @@ form.addEventListener("submit", async (event) => {
   if (validationError) return showMessage(validationError);
 
   try {
-    const response = await fetch("/user/reset-password", {
+    const API = window.location.hostname === "localhost"
+      ? "http://localhost:3000"
+      : "https://quickkart-api.onrender.com";
+    const response = await fetch(`${API}/user/reset-password`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email, password }),
@@ -34,7 +37,7 @@ form.addEventListener("submit", async (event) => {
     showMessage(data.message, false);
     sessionStorage.removeItem("resetEmail");
     sessionStorage.removeItem("otpFlow");
-    window.location.assign("/login");
+    window.location.assign(window.location.hostname === "localhost" ? "/login" : "/login");
   } catch (error) {
     showMessage(error.message || "Unable to reset password");
   }

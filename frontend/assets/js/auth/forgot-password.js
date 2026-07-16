@@ -30,7 +30,10 @@ form.addEventListener("submit", async (event) => {
 
   submitButton.disabled = true;
   try {
-    const response = await fetch("/user/forgot-password", {
+    const API = window.location.hostname === "localhost"
+      ? "http://localhost:3000"
+      : "https://quickkart-api.onrender.com";
+    const response = await fetch(`${API}/user/forgot-password`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email }),
@@ -42,7 +45,7 @@ form.addEventListener("submit", async (event) => {
     showMessage(data.message || "OTP sent. Check your email.", false);
     sessionStorage.setItem("resetEmail", email);
     sessionStorage.setItem("otpFlow", "reset-password");
-    window.location.href = "/user/verify-otp";
+    window.location.href = window.location.hostname === "localhost" ? "/user/verify-otp" : "/verify-otp";
   } catch (error) {
     showMessage(error.message || "Unable to send OTP");
   } finally {

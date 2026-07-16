@@ -11,8 +11,14 @@ let remainingSeconds = 49;
 let expired = false;
 let countdown;
 
+function getFallbackPath() {
+  return window.location.hostname === "localhost"
+    ? (otpFlow === "reset-password" ? "/forgot-password" : "/signup")
+    : (otpFlow === "reset-password" ? "/forgot-password" : "/signup");
+}
+
 if (!email) {
-  window.location.replace(otpFlow === "reset-password" ? "/forgot-password" : "/signup");
+  window.location.replace(getFallbackPath());
 }
 
 function showMessage(text, isError = true) {
@@ -85,15 +91,18 @@ form.addEventListener("submit", async (event) => {
   if (!/^\d{6}$/.test(otp)) return showMessage("Enter the complete six-digit OTP.");
 
   try {
-    const endpoint = otpFlow === "reset-password" ? "/user/verify-reset-otp" : "/user/verify-otp";
+    const API = window.location.hostname === "localhost"
+      ? "http://localhost:3000"
+      : "https://quickkart-api.onrender.com";
+    const endpoint = otpFlow === "reset-password" ? `${API}/user/verify-reset-otp` : `${API}/user/verify-otp`;
     const data = await requestOtp(endpoint, { email, otp });
     clearInterval(countdown);
     showMessage(data.message, false);
     if (otpFlow === "reset-password") {
-      window.location.assign("/reset-password");
+      window.location.assign(window.location.hostname === "localhost" ? "/reset-password" : "/reset-password");
     } else {
       sessionStorage.removeItem("signupEmail");
-      window.location.assign("/user/home");
+      window.location.assign(window.location.hostname === "localhost" ? "/user/home" : "/home");
     }
   } catch (error) {
     showMessage(error.message || "The OTP is invalid or expired.");
@@ -103,7 +112,10 @@ form.addEventListener("submit", async (event) => {
 resendButton.addEventListener("click", async (event) => {
   event.preventDefault();
   try {
-    const endpoint = otpFlow === "reset-password" ? "/user/forgot-password" : "/user/resend-otp";
+    const API = window.location.hostname === "localhost"
+      ? "http://localhost:3000"
+      : "https://quickkart-api.onrender.com";
+    const endpoint = otpFlow === "reset-password" ? `${API}/user/forgot-password` : `${API}/user/resend-otp`;
     const data = await requestOtp(endpoint, { email });
     inputs.forEach((input) => { input.value = ""; });
     inputs[0].focus();

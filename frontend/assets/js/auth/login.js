@@ -2,6 +2,15 @@ const loginForm = document.getElementById("loginForm");
 
 loginForm.addEventListener("submit", login);
 
+const API =
+    window.location.hostname === "localhost"
+        ? "http://localhost:3000"
+        : "https://quickkart-api.onrender.com";
+
+function getHomePath() {
+    return window.location.hostname === "localhost" ? "/user/home" : "/home";
+}
+
 async function login(e) {
     e.preventDefault();
 
@@ -14,7 +23,7 @@ async function login(e) {
     }
 
     try {
-        const response = await fetch("http://localhost:3000/user/login", {
+        const response = await fetch(`${API}/user/login`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -35,7 +44,7 @@ async function login(e) {
 
         alert(data.message);
 
-        window.location.href = "/user/home";
+        window.location.href = getHomePath();
 
     } catch (error) {
         console.error(error);
