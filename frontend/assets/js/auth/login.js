@@ -5,7 +5,7 @@ loginForm.addEventListener("submit", login);
 const API =
     window.location.hostname === "localhost"
         ? "http://localhost:3000"
-        : "https://quickkart-api.onrender.com";
+        : "https://quickart-steel.vercel.app";
 
 function getHomePath() {
     return window.location.hostname === "localhost" ? "/user/home" : "/home";
