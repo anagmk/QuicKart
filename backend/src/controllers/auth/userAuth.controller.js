@@ -18,13 +18,28 @@ const cookieOptions = {
 let redisClient = null;
 
 const getRedisClient = async () => {
+  if (redisClient?.isOpen) {
+    return redisClient;
+  }
+
   if (!redisClient) {
     redisClient = createClient({
       url: process.env.REDIS_URL || "redis://127.0.0.1:6379",
+      socket: { reconnectStrategy: false },
     });
 
-    redisClient.on("error", (err) => console.error("Redis Client Error", err));
+    redisClient.on("error", (err) =>
+      console.error("Redis unavailable:", err.message),
+    );
+  }
+
+  try {
     await redisClient.connect();
+  } catch (error) {
+    redisClient = null;
+    throw new Error(
+      "OTP service is unavailable. Configure REDIS_URL or start Redis.",
+    );
   }
 
   return redisClient;
@@ -34,7 +49,13 @@ export const login = async (req, res) => {
   try {
     const { email, password } = req.body;
 
-    const user = await User.findOne({ email });
+    if (!email || !password) {
+      return res
+        .status(400)
+        .json({ message: "Email and password are required" });
+    }
+
+    const user = await User.findOne({ email: email.toLowerCase() });
     if (!user) {
       return res.status(404).json({ message: "User not found. Check email." });
     }
@@ -42,6 +63,12 @@ export const login = async (req, res) => {
     const validPassword = await bcrypt.compare(password, user.password);
     if (!validPassword) {
       return res.status(401).json({ message: "Password is incorrect" });
+    }
+
+    if (!user.isActive) {
+      return res
+        .status(403)
+        .json({ message: "This account has been disabled" });
     }
 
     const token = generateToken({
@@ -55,6 +82,7 @@ export const login = async (req, res) => {
     const safeUser = user.toObject();
     delete safeUser.password;
 
+    
     return res.status(200).json({
       message: "Login successful",
       user: safeUser,
@@ -154,11 +182,20 @@ export const verifyOtp = async (req, res) => {
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
+    let referrerId = null;
+    if (referredBy) {
+      const referrer = await User.findOne({ referralCode: referredBy.trim() });
+      if (!referrer) {
+        return res.status(400).json({ message: "Invalid referral code" });
+      }
+      referrerId = referrer._id;
+    }
+
     const user = await User.create({
       name,
       email: normalizedEmail,
       password: hashedPassword,
-      referredBy,
+      referredBy: referrerId,
     });
 
     const token = generateToken({
@@ -231,4 +268,118 @@ export const resentOtp = async (req, res) => {
       message: error.message,
     });
   }
+};
+
+export const forgotPassword = async (req, res) => {
+  try {
+    const { email } = req.body;
+
+    if (!email) {
+      return res.status(400).json({ message: "Email is required" });
+    }
+
+    const normalizedEmail = email.toLowerCase();
+
+    const user = await User.findOne({
+      email: normalizedEmail,
+    });
+
+    if (!user) {
+      return res.status(404).json({
+        message: "User not found",
+      });
+    }
+
+    const client = await getRedisClient();
+
+    const otp = Math.floor(100000 + Math.random() * 900000).toString();
+
+    const hashedOtp = await bcrypt.hash(otp, 10);
+
+    await client.set(`resetOtp:${normalizedEmail}`, hashedOtp, {
+      EX: 300,
+    });
+
+    await client.set(`resetEmail:${normalizedEmail}`, normalizedEmail, {
+      EX: 300,
+    });
+
+    await sendOtpEmail(normalizedEmail, otp);
+
+    return res.status(200).json({
+      message: "OTP sent successfully",
+    });
+  } catch (error) {
+    return res.status(500).json({
+      message: error.message,
+    });
+  }
+};
+
+export const verifyResetOtp = async (req, res) => {
+  try {
+    const { email, otp } = req.body;
+    if (!email || !otp) {
+      return res.status(400).json({ message: "Email and OTP are required" });
+    }
+
+    const normalizedEmail = email.toLowerCase();
+    const client = await getRedisClient();
+    const storedOtp = await client.get(`resetOtp:${normalizedEmail}`);
+    const isOtpValid = storedOtp ? await bcrypt.compare(otp, storedOtp) : false;
+
+    if (!isOtpValid) {
+      return res.status(400).json({ message: "Invalid or expired OTP" });
+    }
+
+    await client.del(`resetOtp:${normalizedEmail}`);
+    await client.set(`resetVerified:${normalizedEmail}`, "true", { EX: 300 });
+    return res
+      .status(200)
+      .json({ message: "OTP verified. Set your new password." });
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
+  }
+};
+
+export const resetPassword = async (req, res) => {
+  try {
+    const { email, password } = req.body;
+    if (!email || !password) {
+      return res
+        .status(400)
+        .json({ message: "Email and new password are required" });
+    }
+
+    const normalizedEmail = email.toLowerCase();
+    const client = await getRedisClient();
+    const verified = await client.get(`resetVerified:${normalizedEmail}`);
+    if (!verified) {
+      return res
+        .status(403)
+        .json({ message: "Verify the OTP before resetting your password" });
+    }
+
+    const user = await User.findOne({ email: normalizedEmail });
+    if (!user) return res.status(404).json({ message: "User not found" });
+
+    user.password = await bcrypt.hash(password, 10);
+    await user.save();
+    await client.del(`resetVerified:${normalizedEmail}`);
+    await client.del(`resetEmail:${normalizedEmail}`);
+    return res.status(200).json({ message: "Password reset successfully" });
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
+  }
+};
+
+export const googleCallback = async (req, res) => {
+  const token = generateToken({
+    id: req.user._id,
+    role: req.user.role,
+  });
+
+  res.cookie("jwt", token, cookieOptions);
+
+  res.redirect("/user/home");
 };

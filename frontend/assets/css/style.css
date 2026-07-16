@@ -1,0 +1,237 @@
+
+  :root{
+    --gray-72:#484848;
+    --gray-123:#7b7b7b;
+    --gray-30:#1e1e1e;
+    --bg-241:#f1f1f1;
+    --font-inter:'Inter', sans-serif;
+    --font-poppins:'Poppins', sans-serif;
+    --font-volkhov:'Volkhov', serif;
+  }
+
+  body{
+    font-family: var(--font-inter);
+    color: #000;
+  }
+
+  .logo{
+    font-family: var(--font-volkhov);
+    color: var(--gray-72);
+    font-size: 30px;
+  }
+
+  /* ---------- NAVBAR ---------- */
+  .qk-navbar{
+    background-color: var(--bg-241);
+    padding: 14px 0;
+  }
+  .qk-navbar .nav-link{
+    color: var(--gray-72);
+    font-family: var(--font-poppins);
+    font-size: 15px;
+    margin: 0 10px;
+  }
+  .qk-navbar .btn-signup{
+    background:#cdcdcd;
+    color:#f1f1f1;
+    font-family: var(--font-poppins);
+    border-radius: 6px;
+    font-size: 14px;
+    padding: 6px 18px;
+  }
+  .qk-icons a{
+    color:#000;
+    margin-left: 16px;
+    font-size: 22px;
+  }
+  .search-pill{
+    background:#fff;
+    border:1px solid #000;
+    border-radius:70px;
+    display:flex;
+    align-items:center;
+    padding:4px 12px;
+    font-size:14px;
+    color:var(--gray-123);
+    min-width: 160px;
+  }
+  .search-pill input{
+    border:none;
+    outline:none;
+    font-size:14px;
+    width:100%;
+  }
+
+  /* ---------- HERO ---------- */
+  .hero-section{ background-color: var(--bg-241); padding: 30px 0 60px; }
+  .hero-img{
+    border-radius:10px;
+    overflow:hidden;
+    height: 420px;
+  }
+  .hero-img img{
+    width:100%;
+    height:100%;
+    object-fit: cover;
+  }
+  .hero-center{
+    background:#e0e0e0;
+    border-radius:10px;
+    height:420px;
+    display:flex;
+    flex-direction:column;
+    overflow:hidden;
+    position:relative;
+  }
+  .hero-center .collage{
+    height:45%;
+    background-size:cover;
+    background-position:center;
+  }
+  .hero-center .forever-sale{
+    flex:1;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    font-family: var(--font-poppins);
+    color: var(--gray-72);
+  }
+  .forever-sale .sale-text{
+    font-size: 48px;
+    font-weight:500;
+    letter-spacing:-2%;
+    line-height:1;
+    border: none;
+  }
+  .forever-sale .forever-text{
+    font-size: 26px;
+    font-weight:500;
+    letter-spacing:-2%;
+    line-height:1;
+  }
+  .forever-sale .new-collection{
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin: 8px 0 14px;
+  }
+  .btn-shopnow{
+    background:#000;
+    color:#f1f1f1;
+    font-family: var(--font-poppins);
+    font-size:13px;
+    font-weight:500;
+    letter-spacing:1px;
+    border-radius:10px;
+    padding:10px 26px;
+    box-shadow: 0 12px 24px rgba(0,0,0,.35);
+    border:none;
+  }
+
+  /* ---------- SECTION HEADINGS ---------- */
+  .section-title{
+    font-family: var(--font-inter);
+    font-weight:500;
+    font-size: 32px;
+    text-align:center;
+    margin: 60px 0 32px;
+  }
+
+  /* ---------- CATEGORY / PRODUCT CARDS ---------- */
+  .card-img-wrap{
+    border-radius: 10px;
+    overflow:hidden;
+    aspect-ratio: 3/4;
+    background:#e0e0e0;
+  }
+  .card-img-wrap img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    transition: transform .35s ease;
+  }
+  .product-card:hover .card-img-wrap img{
+    transform: scale(1.05);
+  }
+  .card-label{
+    text-align:center;
+    font-weight:700;
+    font-size: 14px;
+    margin-top: 10px;
+    line-height:1.6;
+  }
+  .card-label.left{
+    text-align:left;
+    font-weight:500;
+    text-transform: capitalize;
+    margin-top: 10px;
+  }
+  .card-price{
+    font-weight:300;
+    color:#000;
+  }
+
+  /* ---------- CAROUSEL ARROWS ---------- */
+  .scroll-arrow{
+    width:32px;height:32px;
+    border-radius:50%;
+    background:#d9d9d9;
+    display:flex;align-items:center;justify-content:center;
+    border:none;
+  }
+
+  /* ---------- FOOTER ---------- */
+  footer{
+    background-color: var(--bg-241);
+    margin-top: 70px;
+    padding: 50px 0 20px;
+  }
+  footer h6{
+    font-weight:700;
+    font-size: 17px;
+    margin-bottom: 16px;
+  }
+  footer a{
+    color:#000;
+    text-decoration:none;
+    display:block;
+    font-size: 14px;
+    margin-bottom: 8px;
+  }
+  footer a:hover{ color: var(--gray-72); }
+  .newsletter-box{
+    background: var(--bg-241);
+    border:1px solid #000;
+    border-radius:6px;
+    display:flex;
+    overflow:hidden;
+  }
+  .newsletter-box input{
+    border:none;
+    background:transparent;
+    outline:none;
+    padding: 8px 12px;
+    font-size:13px;
+    flex:1;
+  }
+  .social-icons a{
+    display:inline-flex;
+    margin-right:12px;
+    font-size:18px;
+  }
+  .footer-bottom{
+    border-top:1px solid #ccc;
+    margin-top:30px;
+    padding-top:16px;
+    text-align:center;
+    font-size:13px;
+    color: var(--gray-123);
+  }
+
+  @media (max-width: 768px){
+    .hero-img, .hero-center{ height: 260px; margin-bottom: 12px; }
+    .forever-sale .sale-text{ font-size: 32px; }
+    .forever-sale .forever-text{ font-size: 18px; }
+  }

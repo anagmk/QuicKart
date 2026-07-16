@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quickart | Verify OTP</title>
+
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="../../assets/css/auth.css" rel="stylesheet">
+
+
+</head>
+
+<body>
+
+  <div class="otp-wrapper">
+
+    <div class="otp-card">
+
+      <h1>Confirm with OTP</h1>
+
+      <p class="sub-title">
+        Please check your mail address for OTP
+      </p>
+
+      <form id="otpForm">
+
+        <div class="otp-box">
+
+          <input type="text" inputmode="numeric" autocomplete="one-time-code" maxlength="1" class="form-control otp-input" placeholder="_" autofocus>
+
+          <input type="text" maxlength="1" class="form-control otp-input" placeholder="_">
+
+          <input type="text" maxlength="1" class="form-control otp-input" placeholder="_">
+
+          <input type="text" maxlength="1" class="form-control otp-input" placeholder="_">
+
+          <input type="text" maxlength="1" class="form-control otp-input" placeholder="_">
+
+          <input type="text" maxlength="1" class="form-control otp-input" placeholder="_">
+
+        </div>
+
+        <p id="otpMessage" class="small text-center mt-3" aria-live="polite"></p>
+
+        <div class="otp-info">
+
+          <div>
+            Remaining Time :
+            <span class="timer" id="timer">
+              00:49s
+            </span>
+          </div>
+
+          <div>
+
+            Didn't receive code?
+
+            <a href="#" id="resendOtp" class="resend-link">
+              Resend
+            </a>
+
+          </div>
+
+        </div>
+
+        <div class="text-center">
+
+          <button class="confirm-btn" type="submit">
+            Confirm
+          </button>
+
+        </div>
+
+        <div class="text-center">
+
+          <a href="/signup" class="back-link">
+            Go back to Signup page
+          </a>
+
+        </div>
+
+      </form>
+
+    </div>
+
+  </div>
+
+  <script src="../../assets/js/auth/otp.js"></script>
+
+</body>
+
+</html>

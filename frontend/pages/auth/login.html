@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quickart | Login</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="../../assets/css/login.css">
+
+</head>
+
+<body>
+
+    <div class="login-wrapper">
+
+        <div class="login-card">
+
+            <h1>Welcome Back</h1>
+
+            <a href="/user/google" class="google-btn">
+                <img src="https://www.svgrepo.com/show/475656/google-color.svg" width="24" alt="google">
+                Continue with Google
+            </a>
+
+            <div class="divider">
+                <span>or</span>
+            </div>
+
+            <form id="loginForm">
+
+                <div class="mb-3">
+
+                    <input
+                        type="email"
+                        id="email"
+                        class="form-control"
+                        placeholder="Email">
+
+                </div>
+
+                <div class="mb-2 password-group">
+
+                    <input
+                        type="password"
+                        id="password"
+                        class="form-control"
+                        placeholder="Password">
+
+                    <i class="bi bi-eye"></i>
+
+                </div>
+
+                <div class="forgot-password">
+
+                    <a href="/forgot-password">
+                        Forgot Password?
+                    </a>
+
+                </div>
+
+                <div class="text-center mt-4">
+
+                    <button class="login-btn" type="submit">
+                        Login
+                    </button>
+
+                </div>
+
+                <div class="text-center mt-4">
+
+                    Don't have an account?
+
+                    <a href="/signup" class="signup-link">
+                        Signup now..!
+                    </a>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+    <script src="../../assets/js/auth/login.js"></script>
+</body>
+
+</html>

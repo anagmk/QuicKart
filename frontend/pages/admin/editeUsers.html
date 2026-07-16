@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Management</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+  <main class="container py-4">
+    <h1 class="mb-4">User Management</h1>
+
+    <form id="userManagementForm" novalidate>
+      <div class="mb-3">
+        <label for="name" class="form-label">Full Name</label>
+        <input type="text" class="form-control" id="name" name="name">
+        <div class="field-error text-danger small mt-1"></div>
+      </div>
+
+      <div class="mb-3">
+        <label for="email" class="form-label">Email</label>
+        <input type="email" class="form-control" id="email" name="email">
+        <div class="field-error text-danger small mt-1"></div>
+      </div>
+
+      <div class="mb-3">
+        <label for="mobile" class="form-label">Mobile</label>
+        <input type="text" class="form-control" id="mobile" name="mobile">
+        <div class="field-error text-danger small mt-1"></div>
+      </div>
+
+      <div class="mb-3">
+        <label for="role" class="form-label">Role</label>
+        <select class="form-select" id="role" name="role">
+          <option value="">Select role</option>
+          <option value="user">User</option>
+          <option value="admin">Admin</option>
+        </select>
+        <div class="field-error text-danger small mt-1"></div>
+      </div>
+
+      <div class="mb-3">
+        <label for="status" class="form-label">Status</label>
+        <select class="form-select" id="status" name="status">
+          <option value="">Select status</option>
+          <option value="true">Active</option>
+          <option value="false">Inactive</option>
+        </select>
+        <div class="field-error text-danger small mt-1"></div>
+      </div>
+
+      <div class="mb-3">
+        <label for="referralCode" class="form-label">Referral Code</label>
+        <input type="text" class="form-control" id="referralCode" name="referralCode">
+        <div class="field-error text-danger small mt-1"></div>
+      </div>
+
+      <button type="submit" class="btn btn-primary">Save User</button>
+    </form>
+  </main>
+
+  <script type="module" src="../../assets/js/admin/userManagement.js"></script>
+</body>
+</html>

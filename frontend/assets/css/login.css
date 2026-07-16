@@ -1,0 +1,149 @@
+* {
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  background: #ffffff;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-wrapper {
+  width: 100%;
+  max-width: 1100px;
+  background: #f5f5f5;
+  padding: 50px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+}
+
+.login-card {
+  background: white;
+  border-radius: 30px;
+  max-width: 700px;
+  margin: auto;
+  padding: 45px 70px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+h1 {
+  text-align: center;
+  font-size: 52px;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+.google-btn {
+  width: 260px;
+  height: 48px;
+  margin: auto;
+  border: none;
+  border-radius: 10px;
+  background: #f7f7f7;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  font-weight: 500;
+}
+
+.google-btn:hover {
+  background: #ececec;
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 25px 0;
+}
+
+.divider::before,
+.divider::after {
+  content: "";
+  width: 70px;
+  height: 1px;
+  background: #888;
+}
+
+.divider span {
+  margin: 0 15px;
+  font-weight: 500;
+}
+
+.form-control {
+  height: 48px;
+  border-radius: 10px;
+}
+
+.password-group {
+  position: relative;
+}
+
+.password-group i {
+  position: absolute;
+  right: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #777;
+}
+
+.forgot-password {
+  text-align: end;
+  margin-top: 8px;
+}
+
+.forgot-password a {
+  color: #555;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.forgot-password a:hover {
+  text-decoration: underline;
+}
+
+.login-btn {
+  width: 150px;
+  height: 48px;
+  border: none;
+  border-radius: 8px;
+  background: #655d5d;
+  color: white;
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.login-btn:hover {
+  background: #4e4646;
+}
+
+.signup-link {
+  text-decoration: none;
+  color: black;
+  font-weight: 500;
+}
+
+.signup-link:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  .login-wrapper {
+    padding: 25px;
+  }
+
+  .login-card {
+    padding: 35px 25px;
+  }
+
+  h1 {
+    font-size: 40px;
+  }
+
+  .google-btn {
+    width: 100%;
+  }
+}
