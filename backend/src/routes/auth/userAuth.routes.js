@@ -11,12 +11,17 @@ import {
   resetPassword,
   googleCallback
 } from "../../controllers/auth/userAuth.controller.js";
+import verifyUserToken from "../../middlewares/verifyUserToken.js";
 
 import passport from "passport";
 
 const router = express.Router();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+
+router.get("/", (_req, res) => {
+  res.sendFile(path.join(__dirname, "../../frontend/index.html"));
+});
 
 router.get("/signup", (_req, res) => {
   res.sendFile(
@@ -57,7 +62,7 @@ router.get(
   googleCallback,
 );
 
-router.get("/home", (_req, res) => {
+router.get("/home", verifyUserToken, (_req, res) => {
   res.sendFile(
     path.join(__dirname, "../../../../frontend/pages/auth/home.html"),
   );
