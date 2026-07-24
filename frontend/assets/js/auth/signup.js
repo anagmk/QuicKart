@@ -7,19 +7,18 @@ import {
 } from "./validation.js";
 
 const form = document.getElementById("signupForm");
-const formMessage = document.getElementById("formMessage");
 
 if (!form) {
     console.error("Signup form not found");
 } else {
-    const clearMessage = () => {
-        if (formMessage) {
-            formMessage.textContent = "";
-        }
+    const clearFieldError = (input) => {
+        input.classList.remove("is-invalid");
+        const error = document.getElementById(`${input.id}Error`);
+        if (error) error.textContent = "";
     };
 
     form.querySelectorAll("input").forEach((input) => {
-        input.addEventListener("input", clearMessage);
+        input.addEventListener("input", () => clearFieldError(input));
     });
 
     form.querySelectorAll(".toggle-password").forEach((icon) => {
@@ -54,30 +53,28 @@ if (!form) {
             const confirmPassword = document.getElementById("confirmPassword")?.value ?? "";
             const referral = document.getElementById("referral")?.value.trim() ?? "";
 
-            const error =
-                validateName(name) ||
-                validateEmail(email) ||
-                validatePassword(password) ||
-                validateConfirmPassword(password, confirmPassword) ||
-                validateReferral(referral);
+            const errors = {
+                name: validateName(name),
+                email: validateEmail(email),
+                password: validatePassword(password),
+                confirmPassword: validateConfirmPassword(password, confirmPassword),
+                referral: validateReferral(referral),
+            };
 
-            if (error) {
-                if (formMessage) {
-                    formMessage.textContent = error;
-                }
+            let firstInvalidInput = null;
+            Object.entries(errors).forEach(([field, error]) => {
+                const input = document.getElementById(field);
+                const errorElement = document.getElementById(`${field}Error`);
+                if (!input || !errorElement) return;
 
-                if (error.includes("Password") && document.getElementById("password")) {
-                    document.getElementById("password").focus();
-                } else if (error.includes("Confirm") && document.getElementById("confirmPassword")) {
-                    document.getElementById("confirmPassword").focus();
-                } else if (document.getElementById("name")) {
-                    document.getElementById("name").focus();
-                }
+                input.classList.toggle("is-invalid", Boolean(error));
+                errorElement.textContent = error;
+                if (error && !firstInvalidInput) firstInvalidInput = input;
+            });
+
+            if (firstInvalidInput) {
+                firstInvalidInput.focus();
                 return;
-            }
-
-            if (formMessage) {
-                formMessage.textContent = "";
             }
 
             console.log("Validation Passed");
@@ -117,11 +114,7 @@ if (!form) {
             sessionStorage.removeItem("resetEmail");
             sessionStorage.removeItem("otpFlow");
             sessionStorage.setItem("signupEmail", userData.email);
-<<<<<<< HEAD
-            window.location.href = window.location.hostname === "localhost" ? "/user/verify-otp" : "/verify-otp";
-=======
             window.location.replace("/user/verify-otp");
->>>>>>> 8aff475 (week 8 completed)
         } catch (error) {
             console.log(error);
             alert("Server Error");

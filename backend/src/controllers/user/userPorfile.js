@@ -131,6 +131,13 @@ export const changePassword = async (req, res) => {
       });
     }
 
+    if (user.googleId) {
+      return res.status(403).json({
+        success: false,
+        message: "Google login users cannot change their password",
+      });
+    }
+
     const isMatch = await bcrypt.compare(oldPassword, user.password);
     if (!isMatch) {
       return res.status(401).json({
@@ -232,6 +239,9 @@ export const requestEmailChange = async (req, res) => {
 
     const user = await User.findById(req.user.id);
     if (!user) return res.status(404).json({ message: "User not found" });
+    if (user.googleId) {
+      return res.status(403).json({ message: "Google accounts cannot change their email address here" });
+    }
     if (user.email !== currentEmail) {
       return res.status(400).json({ message: "Current email does not match your account" });
     }
@@ -253,6 +263,12 @@ export const requestEmailChange = async (req, res) => {
 
 export const resendEmailChangeOtp = async (req, res) => {
   try {
+    const user = await User.findById(req.user.id).select("googleId");
+    if (!user) return res.status(404).json({ message: "User not found" });
+    if (user.googleId) {
+      return res.status(403).json({ message: "Google accounts cannot change their email address here" });
+    }
+
     const client = await getRedisClient();
     const newEmail = await client.get(changeEmailKey(req.user.id));
     if (!newEmail) {
@@ -274,6 +290,12 @@ export const verifyEmailChangeOtp = async (req, res) => {
     }
 
     const client = await getRedisClient();
+    const user = await User.findById(req.user.id).select("googleId");
+    if (!user) return res.status(404).json({ message: "User not found" });
+    if (user.googleId) {
+      return res.status(403).json({ message: "Google accounts cannot change their email address here" });
+    }
+
     const [newEmail, storedOtp] = await Promise.all([
       client.get(changeEmailKey(req.user.id)),
       client.get(changeEmailOtpKey(req.user.id)),
@@ -288,13 +310,13 @@ export const verifyEmailChangeOtp = async (req, res) => {
       return res.status(409).json({ message: "That email address is already in use" });
     }
 
-    const user = await User.findByIdAndUpdate(req.user.id, { email: newEmail }, { new: true });
+    const updatedUser = await User.findByIdAndUpdate(req.user.id, { email: newEmail }, { new: true });
     await Promise.all([
       client.del(changeEmailKey(req.user.id)),
       client.del(changeEmailOtpKey(req.user.id)),
     ]);
 
-    const token = generateToken({ id: user._id, email: user.email, role: user.role });
+    const token = generateToken({ id: updatedUser._id, email: updatedUser.email, role: updatedUser.role });
     res.cookie("jwt", token, {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",

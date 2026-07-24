@@ -8,9 +8,38 @@ document.addEventListener('DOMContentLoaded', async () => {
   const saveBtn = document.getElementById('saveBtn');
   const userName = document.querySelector('.profile-card h6');
   const greeting = document.querySelector('.profile-card small');
-  const genderRadios = document.querySelectorAll('input[name="gender"]');
   const editButtons = document.querySelectorAll('.edit-btn[data-target]');
+  const changeEmailButton = document.getElementById('changeEmailButton');
+  const changePasswordButton = document.getElementById('changePasswordButton');
   let savedPhone = '';
+  let isGoogleUser = false;
+
+  const restrictGoogleAccountAction = (button, message) => {
+    if (!button) return;
+
+    button.classList.toggle('google-restricted-action', isGoogleUser);
+    button.setAttribute('aria-disabled', String(isGoogleUser));
+    button.dataset.bsTitle = isGoogleUser ? message : '';
+    button.dataset.bsTrigger = 'manual';
+
+    if (window.bootstrap?.Tooltip) {
+      window.bootstrap.Tooltip.getOrCreateInstance(button, { placement: 'top' });
+    }
+  };
+
+  [
+    [changeEmailButton, 'Google login users cannot change their email address.'],
+    [changePasswordButton, 'Google login users cannot change their password.'],
+  ].forEach(([button, message]) => {
+    button?.addEventListener('click', (event) => {
+      if (!isGoogleUser) return;
+
+      event.preventDefault();
+      const tooltip = window.bootstrap?.Tooltip.getOrCreateInstance(button, { placement: 'top' });
+      tooltip?.show();
+      window.setTimeout(() => tooltip?.hide(), 2500);
+    });
+  });
 
   cameraBtn?.addEventListener('click', () => imageInput?.click());
 
@@ -65,6 +94,9 @@ document.addEventListener('DOMContentLoaded', async () => {
   const setFormData = (user) => {
     if (nameInput) nameInput.value = user.name || '';
     if (emailInput) emailInput.value = user.email || '';
+    isGoogleUser = Boolean(user.googleId);
+    restrictGoogleAccountAction(changeEmailButton, 'Google login users cannot change their email address.');
+    restrictGoogleAccountAction(changePasswordButton, 'Google login users cannot change their password.');
     if (phoneInput) phoneInput.value = user.mobile || '';
     savedPhone = user.mobile || '';
     if (profileImage) {
@@ -72,10 +104,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
     if (userName) userName.textContent = user.name || 'User';
     if (greeting) greeting.textContent = 'Hello';
-
-    genderRadios.forEach((radio) => {
-      radio.checked = radio.value === (user.gender || '');
-    });
   };
 
   try {

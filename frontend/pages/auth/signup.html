@@ -40,16 +40,19 @@
 
                 <div class="mb-3">
                     <input id="name" name="name" type="text" class="form-control" placeholder="Name">
+                    <div id="nameError" class="invalid-feedback"></div>
                 </div>
 
                 <div class="mb-3">
                     <input id="email" name="email" type="email" class="form-control" placeholder="Email">
+                    <div id="emailError" class="invalid-feedback"></div>
                 </div>
 
                 <div class="mb-3 password-group">
                     <input id="password" name="password" type="password" class="form-control" placeholder="Password">
                     <i class="bi bi-eye toggle-password" data-target="password" role="button" tabindex="0"
                         aria-label="Show password"></i>
+                    <div id="passwordError" class="invalid-feedback"></div>
                 </div>
 
                 <div class="mb-3 password-group">
@@ -57,12 +60,12 @@
                         placeholder="Confirm Password">
                     <i class="bi bi-eye toggle-password" data-target="confirmPassword" role="button" tabindex="0"
                         aria-label="Show confirm password"></i>
+                    <div id="confirmPasswordError" class="invalid-feedback"></div>
                 </div>
-
-                <div id="formMessage" class="text-danger small mb-3" aria-live="polite"></div>
 
                 <div class="mb-4">
                     <input id="referral" name="referral" type="text" class="form-control" placeholder="Referral Code">
+                    <div id="referralError" class="invalid-feedback"></div>
                 </div>
 
                 <div class="text-center">

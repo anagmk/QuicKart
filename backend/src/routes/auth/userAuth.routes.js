@@ -79,10 +79,20 @@ router.get(
 
 router.get(
   "/google/callback",
-  passport.authenticate("google", {
-    failureRedirect: "/login",
-  }),
-  googleCallback,
+  (req, res, next) => {
+    passport.authenticate("google", (error, user, info) => {
+      if (error) return next(error);
+      if (!user) {
+        const message = info?.message || "Google login failed. Please try again.";
+        return res.redirect(`/user/login?error=${encodeURIComponent(message)}`);
+      }
+
+      req.logIn(user, (loginError) => {
+        if (loginError) return next(loginError);
+        return googleCallback(req, res);
+      });
+    })(req, res, next);
+  },
 );
 
 router.get("/home", verifyUserToken, (_req, res) => {

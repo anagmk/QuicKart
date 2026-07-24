@@ -25,6 +25,12 @@ passport.use(
         let user = await User.findOne({ email });
 
         if (user) {
+          if (!user.isActive) {
+            return done(null, false, {
+              message: "You are blocked by the authorities. Please contact them.",
+            });
+          }
+
           if (!user.googleId) {
             user.googleId = profile.id;
           }

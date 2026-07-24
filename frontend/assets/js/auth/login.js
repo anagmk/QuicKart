@@ -1,4 +1,10 @@
 const loginForm = document.getElementById("loginForm");
+const loginError = new URLSearchParams(window.location.search).get("error");
+
+if (loginError) {
+    alert(loginError);
+    window.history.replaceState({}, document.title, window.location.pathname);
+}
 
 if (loginForm) {
     loginForm.querySelectorAll(".toggle-password").forEach((icon) => {
@@ -68,14 +74,10 @@ async function login(e) {
 
         alert(data.message);
 
-<<<<<<< HEAD
-        window.location.href = getHomePath();
-=======
         sessionStorage.removeItem("signupEmail");
         sessionStorage.removeItem("resetEmail");
         sessionStorage.removeItem("otpFlow");
-        window.location.replace("/user/home");
->>>>>>> 8aff475 (week 8 completed)
+        window.location.replace(getHomePath());
 
     } catch (error) {
         console.error(error);

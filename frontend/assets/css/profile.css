@@ -163,6 +163,11 @@ footer li {
     font-weight: bold;
 }
 
+.google-restricted-action {
+    opacity: 0.65;
+    cursor: not-allowed;
+}
+
 @media (max-width: 991.98px) {
     .row.flex-nowrap {
         flex-wrap: wrap !important;

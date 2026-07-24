@@ -60,15 +60,15 @@ export const login = async (req, res) => {
       return res.status(404).json({ message: "User not found. Check email." });
     }
 
+    if (!user.isActive) {
+      return res.status(403).json({
+        message: "You are blocked by the authorities. Please contact them.",
+      });
+    }
+
     const validPassword = await bcrypt.compare(password, user.password);
     if (!validPassword) {
       return res.status(401).json({ message: "Password is incorrect" });
-    }
-
-    if (!user.isActive) {
-      return res
-        .status(403)
-        .json({ message: "This account has been disabled" });
     }
 
     const token = generateToken({
@@ -412,6 +412,12 @@ export const logout = async (req, res) => {
 };
 
 export const googleCallback = async (req, res) => {
+  if (!req.user?.isActive) {
+    return res.redirect(
+      `/user/login?error=${encodeURIComponent("You are blocked by the authorities. Please contact them.")}`,
+    );
+  }
+
   const token = generateToken({
     id: req.user._id,
     role: req.user.role,
