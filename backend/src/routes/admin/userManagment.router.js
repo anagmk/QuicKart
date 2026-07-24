@@ -1,7 +1,7 @@
 import express from "express";
 import path from "path";
 import { fileURLToPath } from "url";
-import { allUsers, getUserById, blockUser,sortUsers,paginateUsers } from "../../controllers/admin/userController.js";
+import { allUsers, getUserById, blockUser, sortUsers, paginateUsers, searchUsersByName } from "../../controllers/admin/userController.js";
 
 const router = express.Router();
 const __filename = fileURLToPath(import.meta.url);
@@ -15,6 +15,7 @@ const sendAllUsersPage = (_req, res) => {
 
 router.get("/users/allUsers", sendAllUsersPage);
 router.get("/users", allUsers);
+router.get("/users/search", searchUsersByName);
 router.get("/users/latest", sortUsers);
 router.get("/users/paginated", paginateUsers);
 

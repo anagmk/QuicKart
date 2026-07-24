@@ -373,6 +373,44 @@ export const resetPassword = async (req, res) => {
   }
 };
 
+export const logout = async (req, res) => {
+  try {
+    if (typeof req.logout === "function") {
+      try {
+        await new Promise((resolve, reject) => {
+          req.logout((err) => {
+            if (err) reject(err);
+            else resolve();
+          });
+        });
+      } catch (error) {
+        console.error("Passport logout failed:", error.message);
+      }
+    }
+
+    if (req.session) {
+      req.session.destroy((err) => {
+        if (err) console.error("Session destroy failed:", err.message);
+      });
+    }
+
+    res.clearCookie("jwt", {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "lax",
+      path: "/",
+    });
+
+    res.setHeader("Cache-Control", "no-store, no-cache, must-revalidate, private");
+    res.setHeader("Pragma", "no-cache");
+    res.setHeader("Expires", "0");
+
+    return res.status(200).json({ message: "Logout successful" });
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
+  }
+};
+
 export const googleCallback = async (req, res) => {
   const token = generateToken({
     id: req.user._id,

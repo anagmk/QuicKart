@@ -1,6 +1,30 @@
 const loginForm = document.getElementById("loginForm");
 
-loginForm.addEventListener("submit", login);
+if (loginForm) {
+    loginForm.querySelectorAll(".toggle-password").forEach((icon) => {
+        icon.addEventListener("click", () => {
+            const targetId = icon.getAttribute("data-target");
+            const targetInput = document.getElementById(targetId);
+
+            if (!targetInput) return;
+
+            const isPassword = targetInput.type === "password";
+            targetInput.type = isPassword ? "text" : "password";
+            icon.classList.toggle("bi-eye", !isPassword);
+            icon.classList.toggle("bi-eye-slash", isPassword);
+            icon.setAttribute("aria-label", isPassword ? "Hide password" : "Show password");
+        });
+
+        icon.addEventListener("keydown", (event) => {
+            if (event.key === "Enter" || event.key === " ") {
+                event.preventDefault();
+                icon.click();
+            }
+        });
+    });
+
+    loginForm.addEventListener("submit", login);
+}
 
 const API =
     window.location.hostname === "localhost"
@@ -44,7 +68,14 @@ async function login(e) {
 
         alert(data.message);
 
+<<<<<<< HEAD
         window.location.href = getHomePath();
+=======
+        sessionStorage.removeItem("signupEmail");
+        sessionStorage.removeItem("resetEmail");
+        sessionStorage.removeItem("otpFlow");
+        window.location.replace("/user/home");
+>>>>>>> 8aff475 (week 8 completed)
 
     } catch (error) {
         console.error(error);

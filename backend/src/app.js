@@ -9,6 +9,7 @@ import passport from "passport";
 import "./config/passport.js";
 import adminAuthRoutes from "./routes/auth/adminAuth.routes.js";
 import usermanagementRoutes from "./routes/admin/userManagment.router.js";
+import userProfileRoutes from "./routes/user/userProfile.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -31,10 +32,20 @@ app.use(
 );
 app.use(passport.initialize());
 app.use(passport.session());
+
+app.use((req, res, next) => {
+  if (req.path.startsWith('/user')) {
+    res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, private');
+    res.setHeader('Pragma', 'no-cache');
+    res.setHeader('Expires', '0');
+  }
+  next();
+});
+
 app.use(express.static(path.join(__dirname, "../../frontend")));
 
-
 app.use('/user', router);
+app.use('/user', userProfileRoutes);
 app.use('/admin', adminAuthRoutes);
 app.use('/admin', usermanagementRoutes);
 

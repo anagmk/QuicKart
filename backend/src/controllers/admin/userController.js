@@ -13,12 +13,32 @@ export const getUserById = async (req, res) => {
   try {
     const { id } = req.params;
     const user = await Users.findById(id);
+    const blockedUsers = await find({isActive:false})
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
     res.status(200).json(user);
   } catch (error) {
     res.status(500).json({ message: error.message });
+  }
+};
+
+export const searchUsersByName = async (req, res) => {
+  try {
+    const query = req.query.q?.trim();
+
+    if (!query) {
+      const users = await Users.find().sort({ createdAt: -1 });
+      return res.status(200).json(users);
+    }
+
+    const users = await Users.find({
+      name: { $regex: query, $options: "i" },
+    }).sort({ createdAt: -1 });
+
+    return res.status(200).json(users);
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
   }
 };
 
@@ -29,9 +49,15 @@ export const blockUser = async (req, res) => {
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
-    user.isActive = false;
+
+    user.isActive = !user.isActive;
     await user.save();
-    res.status(200).json({ message: "User blocked successfully" });
+
+    const action = user.isActive ? "unblocked" : "blocked";
+    res.status(200).json({
+      message: `User ${action} successfully`,
+      isActive: user.isActive,
+    });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

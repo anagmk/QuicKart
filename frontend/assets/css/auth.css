@@ -5,67 +5,108 @@
 }
 
 body{
-    background:#f7f7f7;
     font-family:'Poppins',sans-serif;
+    background:#ffffff;
+    min-height:100vh;
 }
 
-.forgot-card{
-    width:740px;
-    min-height:500px;
+.otp-wrapper{
+    width:100%;
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:40px 20px;
+}
+
+.otp-card{
+    width:700px;
     background:#fff;
-    border-radius:28px;
-    padding:80px 90px;
+    border-radius:30px;
+    padding:70px 80px;
+    box-shadow:0 15px 45px rgba(0,0,0,.08);
 }
 
-.title{
-    font-family:Georgia, serif;
-    font-size:56px;
-    font-weight:700;
+.otp-card h1{
     text-align:center;
-    margin-bottom:50px;
+    font-size:52px;
+    font-weight:700;
     color:#111;
-}
-
-.subtitle{
-    font-size:22px;
-    color:#222;
     margin-bottom:18px;
 }
 
-.custom-input{
-    height:58px;
-    border-radius:14px;
-    border:1px solid #d5d5d5;
+.sub-title{
+    text-align:center;
+    color:#555;
     font-size:18px;
-    padding-left:20px;
+    margin-bottom:30px;
+}
+
+.otp-box{
+    display:flex;
+    justify-content:center;
+    gap:12px;
+    margin-bottom:30px;
+}
+
+.otp-input{
+    width:50px;
+    height:50px;
+    border-radius:10px;
+    border:1px solid #d5d5d5;
+    text-align:center;
+    font-size:22px;
+    font-weight:600;
     box-shadow:none;
 }
 
-.custom-input:focus{
+.otp-input:focus{
+    border-color:#6d6060;
     box-shadow:none;
-    border-color:#8f7e7e;
 }
 
-.send-btn{
-    width:210px;
-    height:56px;
-    background:#675d5d;
-    color:#fff;
+.otp-info{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:35px;
+    font-size:14px;
+    color:#555;
+}
+
+.timer{
+    color:#4f46e5;
+    font-weight:600;
+}
+
+.resend-link{
+    text-decoration:none;
+    color:#4f46e5;
+    font-weight:600;
+}
+
+.confirm-btn{
+    width:190px;
+    height:55px;
+    border:none;
     border-radius:18px;
-    font-size:24px;
+    background:#665d5d;
+    color:#fff;
+    font-size:22px;
     font-weight:600;
     transition:.3s;
 }
 
-.send-btn:hover{
-    background:#564c4c;
-    color:#fff;
+.confirm-btn:hover{
+    background:#564d4d;
 }
 
 .back-link{
+    display:inline-block;
+    margin-top:30px;
     text-decoration:none;
-    color:#4d4d4d;
-    font-size:22px;
+    color:#222;
+    font-size:18px;
 }
 
 .back-link:hover{
@@ -74,21 +115,27 @@ body{
 
 @media(max-width:768px){
 
-    .forgot-card{
-        width:95%;
-        padding:50px 30px;
+    .otp-card{
+        width:100%;
+        padding:45px 25px;
     }
 
-    .title{
-        font-size:42px;
+    .otp-card h1{
+        font-size:36px;
     }
 
-    .subtitle{
+    .otp-box{
+        gap:8px;
+    }
+
+    .otp-input{
+        width:42px;
+        height:42px;
         font-size:18px;
     }
 
-    .back-link{
-        font-size:18px;
+    .otp-info{
+        flex-direction:column;
+        gap:12px;
     }
-
 }

@@ -1,12 +1,17 @@
 const otpFlow = sessionStorage.getItem("otpFlow") || "signup";
 const email = otpFlow === "reset-password"
   ? sessionStorage.getItem("resetEmail")
-  : sessionStorage.getItem("signupEmail");
+  : otpFlow === "change-email"
+    ? sessionStorage.getItem("changeEmail")
+    : otpFlow === "change-phone"
+      ? sessionStorage.getItem("changePhone")
+    : sessionStorage.getItem("signupEmail");
 const form = document.getElementById("otpForm");
 const inputs = [...document.querySelectorAll(".otp-input")];
 const message = document.getElementById("otpMessage");
 const resendButton = document.getElementById("resendOtp");
 const timer = document.getElementById("timer");
+const subtitle = document.querySelector(".sub-title");
 let remainingSeconds = 49;
 let expired = false;
 let countdown;
@@ -18,7 +23,22 @@ function getFallbackPath() {
 }
 
 if (!email) {
+<<<<<<< HEAD
   window.location.replace(getFallbackPath());
+=======
+  const fallback = otpFlow === "reset-password"
+    ? "/forgot-password"
+    : otpFlow === "change-email"
+      ? "/user/change-email"
+      : otpFlow === "change-phone"
+        ? "/user/profile"
+      : "/user/signup";
+  window.location.replace(fallback);
+}
+
+if (otpFlow === "change-phone" && subtitle) {
+  subtitle.textContent = "We sent an OTP by SMS to your new phone number.";
+>>>>>>> 8aff475 (week 8 completed)
 }
 
 function showMessage(text, isError = true) {
@@ -91,6 +111,7 @@ form.addEventListener("submit", async (event) => {
   if (!/^\d{6}$/.test(otp)) return showMessage("Enter the complete six-digit OTP.");
 
   try {
+<<<<<<< HEAD
     const API = window.location.hostname === "localhost"
       ? "http://localhost:3000"
       : "https://quickkart-api.onrender.com";
@@ -103,6 +124,35 @@ form.addEventListener("submit", async (event) => {
     } else {
       sessionStorage.removeItem("signupEmail");
       window.location.assign(window.location.hostname === "localhost" ? "/user/home" : "/home");
+=======
+    const endpoint = otpFlow === "reset-password"
+      ? "/user/verify-reset-otp"
+      : otpFlow === "change-email"
+        ? "/user/change-email/verify"
+        : otpFlow === "change-phone"
+          ? "/user/change-phone/verify"
+        : "/user/verify-otp";
+    const data = await requestOtp(
+      endpoint,
+      otpFlow === "change-email" || otpFlow === "change-phone" ? { otp } : { email, otp },
+    );
+    clearInterval(countdown);
+    showMessage(data.message, false);
+    if (otpFlow === "reset-password") {
+      window.location.replace("/user/reset-password");
+    } else if (otpFlow === "change-email") {
+      sessionStorage.removeItem("changeEmail");
+      sessionStorage.removeItem("otpFlow");
+      window.location.replace("/user/profile");
+    } else if (otpFlow === "change-phone") {
+      sessionStorage.removeItem("changePhone");
+      sessionStorage.removeItem("otpFlow");
+      window.location.replace("/user/profile");
+    } else {
+      sessionStorage.removeItem("signupEmail");
+      sessionStorage.removeItem("otpFlow");
+      window.location.replace("/user/home");
+>>>>>>> 8aff475 (week 8 completed)
     }
   } catch (error) {
     showMessage(error.message || "The OTP is invalid or expired.");
@@ -112,11 +162,25 @@ form.addEventListener("submit", async (event) => {
 resendButton.addEventListener("click", async (event) => {
   event.preventDefault();
   try {
+<<<<<<< HEAD
     const API = window.location.hostname === "localhost"
       ? "http://localhost:3000"
       : "https://quickkart-api.onrender.com";
     const endpoint = otpFlow === "reset-password" ? `${API}/user/forgot-password` : `${API}/user/resend-otp`;
     const data = await requestOtp(endpoint, { email });
+=======
+    const endpoint = otpFlow === "reset-password"
+      ? "/user/forgot-password"
+      : otpFlow === "change-email"
+        ? "/user/change-email/resend"
+        : otpFlow === "change-phone"
+          ? "/user/change-phone/resend"
+        : "/user/resend-otp";
+    const data = await requestOtp(
+      endpoint,
+      otpFlow === "change-email" || otpFlow === "change-phone" ? {} : { email },
+    );
+>>>>>>> 8aff475 (week 8 completed)
     inputs.forEach((input) => { input.value = ""; });
     inputs[0].focus();
     clearError();

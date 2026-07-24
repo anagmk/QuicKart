@@ -114,8 +114,14 @@ if (!form) {
 
             alert(data.message || "Signup successful");
 
+            sessionStorage.removeItem("resetEmail");
+            sessionStorage.removeItem("otpFlow");
             sessionStorage.setItem("signupEmail", userData.email);
+<<<<<<< HEAD
             window.location.href = window.location.hostname === "localhost" ? "/user/verify-otp" : "/verify-otp";
+=======
+            window.location.replace("/user/verify-otp");
+>>>>>>> 8aff475 (week 8 completed)
         } catch (error) {
             console.log(error);
             alert("Server Error");

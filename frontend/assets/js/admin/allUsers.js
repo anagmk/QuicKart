@@ -1,7 +1,23 @@
 const tableBody = document.getElementById("userTable");
+const searchInput = document.getElementById("userSearch");
+const clearSearchBtn = document.getElementById("clearSearchBtn");
+let allUsersData = [];
 
 document.addEventListener("DOMContentLoaded", () => {
     loadUsers();
+
+    if (searchInput) {
+        searchInput.addEventListener("input", handleSearch);
+    }
+
+    if (clearSearchBtn) {
+        clearSearchBtn.addEventListener("click", () => {
+            if (searchInput) {
+                searchInput.value = "";
+                renderUsers(allUsersData);
+            }
+        });
+    }
 });
 
 async function loadUsers() {
@@ -17,6 +33,7 @@ async function loadUsers() {
         }
 
         const users = Array.isArray(data) ? data : data.users || [];
+        allUsersData = users;
         renderUsers(users);
     } catch (error) {
         console.error("Error loading users:", error);
@@ -30,6 +47,37 @@ async function loadUsers() {
                 </tr>
             `;
         }
+    }
+}
+
+async function handleSearch() {
+    const query = searchInput?.value?.trim() || "";
+
+    if (!query) {
+        renderUsers(allUsersData);
+        return;
+    }
+
+    try {
+        const response = await fetch(`/admin/users/search?q=${encodeURIComponent(query)}`, {
+            credentials: "include"
+        });
+
+        const data = await response.json().catch(() => []);
+
+        if (!response.ok) {
+            throw new Error(data.message || "Search failed");
+        }
+
+        const users = Array.isArray(data) ? data : data.users || [];
+        renderUsers(users);
+    } catch (error) {
+        console.error("Search error:", error);
+        tableBody.innerHTML = `
+            <tr>
+                <td colspan="6" class="text-center text-danger">${error.message || "Unable to search users."}</td>
+            </tr>
+        `;
     }
 }
 
@@ -77,6 +125,32 @@ function renderUsers(users) {
     });
 }
 
-function toggleStatus(userId) {
-    console.log("Toggle user status:", userId);
+    async function toggleStatus(userId) {
+    const userRow = Array.from(tableBody?.children || []).find((row) =>
+        row.querySelector("button")?.getAttribute("onclick")?.includes(userId)
+    );
+    const statusText = userRow?.querySelector(".badge")?.textContent?.trim() || "";
+    const action = statusText === "Blocked" ? "unblock" : "block";
+    const confirmed = window.confirm(`Are you sure you want to ${action} this user?`);
+
+    if (!confirmed) return;
+
+    try {
+        const response = await fetch(`/admin/users/${userId}/block`, {
+            method: "PATCH",
+            credentials: "include"
+        });
+
+        const data = await response.json().catch(() => ({}));
+
+        if (!response.ok) {
+            throw new Error(data.message || `Failed to ${action} user`);
+        }
+
+        alert(data.message || `User ${action}ed successfully`);
+        loadUsers();
+    } catch (error) {
+        console.error("Error updating user status:", error);
+        alert(error.message || "Unable to update user status");
+    }
 }

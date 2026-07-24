@@ -1,15 +1,19 @@
-import mongoose from "mongoose";
+import path from "path";
+import { fileURLToPath } from "url";
 import bcrypt from "bcrypt";
 import dotenv from "dotenv";
 
 import connectDB from "../src/config/db.js";
 import Admin from "../src/models/admin.model.js";
 
-dotenv.config();
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+dotenv.config({ path: path.resolve(__dirname, "../.env") });
 
 const createAdmin = async () => {
   try {
-    await connectDB;
+    await connectDB();
 
     const existingAdmin = await Admin.findOne({
       email: "admin@quickart.com",

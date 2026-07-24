@@ -1,0 +1,181 @@
+body {
+    background: #cabbbb;
+    font-family: "Poppins", sans-serif;
+}
+
+.main-wrapper {
+    min-height: 100vh;
+    width: 100%;
+    margin: 0;
+    background: #fff;
+    overflow: hidden;
+}
+
+/* Navbar */
+
+.navbar-brand {
+    font-size: 42px;
+    font-weight: 700;
+    font-family: Georgia, serif;
+}
+
+.search-box {
+    width: 180px;
+    height: 34px;
+    border-radius: 20px;
+}
+
+/* Sidebar */
+.side-bar{
+    width: 25%;
+    max-width: 25%;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-right: 0;
+    flex: 0 0 25%;
+    align-self: flex-start;
+}
+
+.address-content {
+    width: 75%;
+    max-width: 75%;
+    flex: 0 0 75%;
+}
+
+.profile-card {
+    background: #2c2426;
+    color: white;
+    padding: 15px;
+    border-radius: 8px;
+}
+
+.profile-card img {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+}
+
+.menu {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.menu .list-group-item {
+    cursor: pointer;
+    font-size: 15px;
+    padding: 14px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.menu .list-group-item:hover {
+    background: #f7f7f7;
+}
+
+.menu .list-group-item.sidebar-active,
+.menu .list-group-item.sidebar-active:hover {
+    background: #000;
+    border-color: #000;
+    color: #fff;
+}
+
+.logout-section {
+    margin-top: auto;
+    padding-top: 8px;
+}
+
+.logout-section .list-group-item {
+    border-radius: 10px;
+    padding: 14px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: #b42318;
+    font-weight: 600;
+}
+
+/* Logout */
+
+.logout-card {
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    padding: 32px 24px;
+    text-align: center;
+    min-height: 320px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    max-width: 700px;
+    flex: 1 1 auto;
+    margin-left: 0;
+    align-self: flex-start;
+}
+
+.logout-icon {
+    font-size: 120px;
+    color: #555;
+}
+
+.logout-title {
+    font-size: 60px;
+    font-weight: bold;
+    color: #555;
+}
+
+.logout-text {
+    max-width: 500px;
+    margin: auto;
+    color: #555;
+}
+
+.logout-btn {
+    width: 220px;
+    margin: auto;
+    margin-top: 40px;
+    border: none;
+    padding: 14px;
+    border-radius: 30px;
+    color: white;
+    background: linear-gradient(to right, #c42020, #f7b2a5);
+}
+
+footer {
+    border-top: 1px solid #ddd;
+}
+
+footer ul {
+    list-style: none;
+    padding: 0;
+}
+
+footer li {
+    margin-bottom: 8px;
+    font-size: 14px;
+}
+
+.footer-logo {
+    font-size: 48px;
+    font-family: Georgia, serif;
+    font-weight: bold;
+}
+
+@media (max-width: 991.98px) {
+    .row.flex-nowrap {
+        flex-wrap: wrap !important;
+    }
+
+    .side-bar,
+    .address-content {
+        width: 100%;
+        max-width: 100%;
+        flex: 0 0 100%;
+    }
+
+    .side-bar {
+        margin-bottom: 24px;
+    }
+}
