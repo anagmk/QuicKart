@@ -1,203 +1,211 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>QuicKart | Home</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QuicKart | Home</title>
 
 
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&family=Poppins:wght@400;500&family=Volkhov&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&family=Poppins:wght@400;500&family=Volkhov&display=swap"
+    rel="stylesheet">
 
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-<link rel="stylesheet" href="/assets/css/style.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/style.css">
 </head>
+
 <body>
 
 
-<nav class="qk-navbar">
-  <div class="container d-flex flex-wrap align-items-center justify-content-between">
-    <span class="logo">QuicKart</span>
+  <nav class="qk-navbar">
+    <div class="container d-flex flex-wrap align-items-center justify-content-between">
+      <span class="logo">QuicKart</span>
 
-    <div class="d-none d-lg-flex align-items-center">
-      
-    </div>
+      <div class="d-none d-lg-flex align-items-center">
 
-    <div class="d-flex align-items-center gap-3">
-      <div class="search-pill d-none d-md-flex">
-        <span class="material-icons" style="font-size:16px;">search</span>
-        <input type="text" placeholder="Search">
       </div>
-      <div class="qk-icons">
-        <a href="/user/wishlist"><span class="material-icons">favorite_border</span></a>
-        <a href="/user/profile"><span class="material-icons">account_circle</span></a>
-        <a href="/user/cart"><span class="material-icons">shopping_bag</span></a>
-      </div>
-    </div>
-  </div>
-</nav>
 
-
-<section class="hero-section">
-  <div class="container">
-    <div class="row g-3">
-      <div class="col-lg-4 col-md-6">
-        <div class="hero-img">
-          <img src="https://picsum.photos/seed/quickart-dress1/500/700" alt="Green dress">
+      <div class="d-flex align-items-center gap-3">
+        <div class="search-pill d-none d-md-flex">
+          <span class="material-icons" style="font-size:16px;">search</span>
+          <input type="text" placeholder="Search">
+        </div>
+        <div class="qk-icons">
+          <a href="/user/wishlist"><span class="material-icons">favorite_border</span></a>
+          <a href="/user/profile"><span class="material-icons">account_circle</span></a>
+          <a href="/user/cart"><span class="material-icons">shopping_bag</span></a>
         </div>
       </div>
+    </div>
+  </nav>
 
-      <div class="col-lg-4 col-md-6">
-        <div class="hero-center">
-          <div class="collage" style="background-image:url('https://picsum.photos/seed/quickart-collage/500/300');"></div>
-          <div class="forever-sale">
-            <p class="sale-text m-0">FOREVER</p>
-            <p class="forever-text m-0">SALE</p>
-            <p class="new-collection">New Collection</p>
-            <button class="btn-shopnow">SHOP NOW</button>
+
+  <section class="hero-section">
+    <div class="container">
+      <div class="row g-3">
+        <div class="col-lg-4 col-md-6">
+          <div class="hero-img">
+            <img src="https://picsum.photos/seed/quickart-dress1/500/700" alt="Green dress">
+          </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6">
+          <div class="hero-center">
+            <div class="collage" style="background-image:url('https://picsum.photos/seed/quickart-collage/500/300');">
+            </div>
+            <div class="forever-sale">
+              <p class="sale-text m-0">FOREVER</p>
+              <p class="forever-text m-0">SALE</p>
+              <p class="new-collection">New Collection</p>
+              <a href="/user/products">
+                <button class="btn-shopnow">SHOP NOW</button>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-4 col-md-12">
+          <div class="hero-img">
+            <img src="https://picsum.photos/seed/quickart-dress2/500/700" alt="Pink dress">
           </div>
         </div>
       </div>
+    </div>
+  </section>
 
-      <div class="col-lg-4 col-md-12">
-        <div class="hero-img">
-          <img src="https://picsum.photos/seed/quickart-dress2/500/700" alt="Pink dress">
+  <section class="container">
+    <h2 class="section-title">EXPLORE BY CATEGORY</h2>
+    <div class="row g-3 row-cols-2 row-cols-md-5">
+      <div class="col product-card">
+        <div class="card-img-wrap"><img src="https://picsum.photos/seed/cat-tshirt/300/400" alt="T-Shirts"></div>
+        <p class="card-label">T-Shirts</p>
+      </div>
+      <div class="col product-card">
+        <div class="card-img-wrap"><img src="https://picsum.photos/seed/cat-jeans/300/400" alt="Jeans"></div>
+        <p class="card-label">Jeans</p>
+      </div>
+      <div class="col product-card">
+        <div class="card-img-wrap"><img src="https://picsum.photos/seed/cat-mens/300/400" alt="Men's"></div>
+        <p class="card-label">Men's</p>
+      </div>
+      <div class="col product-card">
+        <div class="card-img-wrap"><img src="https://picsum.photos/seed/cat-sportsbra/300/400" alt="Sports Bra"></div>
+        <p class="card-label">Sports Bra</p>
+      </div>
+      <div class="col product-card">
+        <div class="card-img-wrap"><img src="https://picsum.photos/seed/cat-kurti/300/400" alt="Kurti"></div>
+        <p class="card-label">Kurti</p>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="container">
+    <div class="d-flex align-items-center justify-content-center gap-3">
+      <button class="scroll-arrow"><span class="material-icons" style="font-size:16px;">chevron_left</span></button>
+      <h2 class="section-title mb-0">TOP TRENDS</h2>
+      <button class="scroll-arrow"><span class="material-icons" style="font-size:16px;">chevron_right</span></button>
+    </div>
+    <div class="row g-3 row-cols-2 row-cols-md-5 mt-2">
+      <div class="col product-card">
+        <div class="card-img-wrap"><img src="https://picsum.photos/seed/trend-tshirt/300/400" alt="T-Shirt"></div>
+        <p class="card-label">T-Shirts</p>
+      </div>
+      <div class="col product-card">
+        <div class="card-img-wrap"><img src="https://picsum.photos/seed/trend-dress/300/400" alt="Dress"></div>
+        <p class="card-label">Dress</p>
+      </div>
+      <div class="col product-card">
+        <div class="card-img-wrap"><img src="https://picsum.photos/seed/trend-jeans/300/400" alt="Jeans"></div>
+        <p class="card-label">Jeans</p>
+      </div>
+      <div class="col product-card">
+        <div class="card-img-wrap"><img src="https://picsum.photos/seed/trend-jacket/300/400" alt="Jackets"></div>
+        <p class="card-label">Jackets</p>
+      </div>
+      <div class="col product-card">
+        <div class="card-img-wrap"><img src="https://picsum.photos/seed/trend-hoodie/300/400" alt="Power Hoodie"></div>
+        <p class="card-label">Power Hoodie</p>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="container">
+    <div class="d-flex align-items-center justify-content-center gap-3">
+      <button class="scroll-arrow"><span class="material-icons" style="font-size:16px;">chevron_left</span></button>
+      <h2 class="section-title mb-0">NEW ARRIVALS</h2>
+      <button class="scroll-arrow"><span class="material-icons" style="font-size:16px;">chevron_right</span></button>
+    </div>
+    <div class="row g-3 row-cols-2 row-cols-md-5 mt-2">
+      <div class="col product-card">
+        <div class="card-img-wrap"><img src="https://picsum.photos/seed/new-tshirt/300/400" alt="T-Shirt"></div>
+        <p class="card-label left">T-Shirt</p>
+        <p class="card-price">$24.00</p>
+      </div>
+      <div class="col product-card">
+        <div class="card-img-wrap"><img src="https://picsum.photos/seed/new-stripe/300/400" alt="Stripe T-Shirt"></div>
+        <p class="card-label left">Stripe T-Shirt</p>
+        <p class="card-price">$26.00</p>
+      </div>
+      <div class="col product-card">
+        <div class="card-img-wrap"><img src="https://picsum.photos/seed/new-shorts/300/400" alt="Shorts"></div>
+        <p class="card-label left">Shorts</p>
+        <p class="card-price">$32.00</p>
+      </div>
+      <div class="col product-card">
+        <div class="card-img-wrap"><img src="https://picsum.photos/seed/new-jacket/300/400" alt="Leather Jacket"></div>
+        <p class="card-label left">Leather Jacket</p>
+        <p class="card-price">$88.00</p>
+      </div>
+      <div class="col product-card">
+        <div class="card-img-wrap"><img src="https://picsum.photos/seed/new-hoodie/300/400" alt="Power Hoodie"></div>
+        <p class="card-label left">Power Hoodie</p>
+        <p class="card-price">$45.00</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div class="row gy-4">
+        <div class="col-md-3">
+          <span class="logo" style="font-size:26px;">QuicKart</span>
+        </div>
+        <div class="col-md-3">
+          <h6>Info</h6>
+          <a href="#">Contact us</a>
+          <a href="#">About us</a>
+        </div>
+        <div class="col-md-3">
+          <h6>Policies</h6>
+          <a href="#">Privacy Notice</a>
+          <a href="#">Return policy</a>
+          <a href="#">Terms and Conditions</a>
+          <a href="#">Cookie Policy</a>
+        </div>
+        <div class="col-md-3">
+          <h6>Subscribe to Our News Letter</h6>
+          <div class="newsletter-box mb-3">
+            <input type="email" placeholder="Email Address">
+          </div>
+          <div class="social-icons">
+            <a href="#" class="text-dark"><span class="material-icons">photo_camera</span></a>
+            <a href="#" class="text-dark"><span class="material-icons">facebook</span></a>
+            <a href="#" class="text-dark"><span class="material-icons">alternate_email</span></a>
+          </div>
         </div>
       </div>
-    </div>
-  </div>
-</section>
-
-<section class="container">
-  <h2 class="section-title">EXPLORE BY CATEGORY</h2>
-  <div class="row g-3 row-cols-2 row-cols-md-5">
-    <div class="col product-card">
-      <div class="card-img-wrap"><img src="https://picsum.photos/seed/cat-tshirt/300/400" alt="T-Shirts"></div>
-      <p class="card-label">T-Shirts</p>
-    </div>
-    <div class="col product-card">
-      <div class="card-img-wrap"><img src="https://picsum.photos/seed/cat-jeans/300/400" alt="Jeans"></div>
-      <p class="card-label">Jeans</p>
-    </div>
-    <div class="col product-card">
-      <div class="card-img-wrap"><img src="https://picsum.photos/seed/cat-mens/300/400" alt="Men's"></div>
-      <p class="card-label">Men's</p>
-    </div>
-    <div class="col product-card">
-      <div class="card-img-wrap"><img src="https://picsum.photos/seed/cat-sportsbra/300/400" alt="Sports Bra"></div>
-      <p class="card-label">Sports Bra</p>
-    </div>
-    <div class="col product-card">
-      <div class="card-img-wrap"><img src="https://picsum.photos/seed/cat-kurti/300/400" alt="Kurti"></div>
-      <p class="card-label">Kurti</p>
-    </div>
-  </div>
-</section>
-
-
-<section class="container">
-  <div class="d-flex align-items-center justify-content-center gap-3">
-    <button class="scroll-arrow"><span class="material-icons" style="font-size:16px;">chevron_left</span></button>
-    <h2 class="section-title mb-0">TOP TRENDS</h2>
-    <button class="scroll-arrow"><span class="material-icons" style="font-size:16px;">chevron_right</span></button>
-  </div>
-  <div class="row g-3 row-cols-2 row-cols-md-5 mt-2">
-    <div class="col product-card">
-      <div class="card-img-wrap"><img src="https://picsum.photos/seed/trend-tshirt/300/400" alt="T-Shirt"></div>
-      <p class="card-label">T-Shirts</p>
-    </div>
-    <div class="col product-card">
-      <div class="card-img-wrap"><img src="https://picsum.photos/seed/trend-dress/300/400" alt="Dress"></div>
-      <p class="card-label">Dress</p>
-    </div>
-    <div class="col product-card">
-      <div class="card-img-wrap"><img src="https://picsum.photos/seed/trend-jeans/300/400" alt="Jeans"></div>
-      <p class="card-label">Jeans</p>
-    </div>
-    <div class="col product-card">
-      <div class="card-img-wrap"><img src="https://picsum.photos/seed/trend-jacket/300/400" alt="Jackets"></div>
-      <p class="card-label">Jackets</p>
-    </div>
-    <div class="col product-card">
-      <div class="card-img-wrap"><img src="https://picsum.photos/seed/trend-hoodie/300/400" alt="Power Hoodie"></div>
-      <p class="card-label">Power Hoodie</p>
-    </div>
-  </div>
-</section>
-
-
-<section class="container">
-  <div class="d-flex align-items-center justify-content-center gap-3">
-    <button class="scroll-arrow"><span class="material-icons" style="font-size:16px;">chevron_left</span></button>
-    <h2 class="section-title mb-0">NEW ARRIVALS</h2>
-    <button class="scroll-arrow"><span class="material-icons" style="font-size:16px;">chevron_right</span></button>
-  </div>
-  <div class="row g-3 row-cols-2 row-cols-md-5 mt-2">
-    <div class="col product-card">
-      <div class="card-img-wrap"><img src="https://picsum.photos/seed/new-tshirt/300/400" alt="T-Shirt"></div>
-      <p class="card-label left">T-Shirt</p>
-      <p class="card-price">$24.00</p>
-    </div>
-    <div class="col product-card">
-      <div class="card-img-wrap"><img src="https://picsum.photos/seed/new-stripe/300/400" alt="Stripe T-Shirt"></div>
-      <p class="card-label left">Stripe T-Shirt</p>
-      <p class="card-price">$26.00</p>
-    </div>
-    <div class="col product-card">
-      <div class="card-img-wrap"><img src="https://picsum.photos/seed/new-shorts/300/400" alt="Shorts"></div>
-      <p class="card-label left">Shorts</p>
-      <p class="card-price">$32.00</p>
-    </div>
-    <div class="col product-card">
-      <div class="card-img-wrap"><img src="https://picsum.photos/seed/new-jacket/300/400" alt="Leather Jacket"></div>
-      <p class="card-label left">Leather Jacket</p>
-      <p class="card-price">$88.00</p>
-    </div>
-    <div class="col product-card">
-      <div class="card-img-wrap"><img src="https://picsum.photos/seed/new-hoodie/300/400" alt="Power Hoodie"></div>
-      <p class="card-label left">Power Hoodie</p>
-      <p class="card-price">$45.00</p>
-    </div>
-  </div>
-</section>
-
-<footer>
-  <div class="container">
-    <div class="row gy-4">
-      <div class="col-md-3">
-        <span class="logo" style="font-size:26px;">QuicKart</span>
-      </div>
-      <div class="col-md-3">
-        <h6>Info</h6>
-        <a href="#">Contact us</a>
-        <a href="#">About us</a>
-      </div>
-      <div class="col-md-3">
-        <h6>Policies</h6>
-        <a href="#">Privacy Notice</a>
-        <a href="#">Return policy</a>
-        <a href="#">Terms and Conditions</a>
-        <a href="#">Cookie Policy</a>
-      </div>
-      <div class="col-md-3">
-        <h6>Subscribe to Our News Letter</h6>
-        <div class="newsletter-box mb-3">
-          <input type="email" placeholder="Email Address">
-        </div>
-        <div class="social-icons">
-          <a href="#" class="text-dark"><span class="material-icons">photo_camera</span></a>
-          <a href="#" class="text-dark"><span class="material-icons">facebook</span></a>
-          <a href="#" class="text-dark"><span class="material-icons">alternate_email</span></a>
-        </div>
+      <div class="footer-bottom">
+        © 2026 | QuicKart | All Rights Reserved. | We Give You Style.
       </div>
     </div>
-    <div class="footer-bottom">
-      © 2026 | QuicKart | All Rights Reserved. | We Give You Style.
-    </div>
-  </div>
-</footer>
+  </footer>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>

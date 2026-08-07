@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>QuickKart Categories</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css">
+
+    <link rel="stylesheet" href="/assets/css/admin-dashboard.css">
+</head>
+
+<body>
+
+    <!-- Header -->
+
+    <header class="dashboard-header">
+
+        <h1 class="logo">
+            QuicKart
+        </h1>
+
+        <div class="profile">
+            <i class="bi bi-person-circle"></i>
+        </div>
+
+    </header>
+
+    <!-- Main Layout -->
+
+    <div class="container-fluid">
+
+        <div class="row">
+
+            <!-- Sidebar -->
+
+            <aside class="col-lg-2 col-md-3 sidebar">
+
+                <ul class="nav flex-column">
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="bi bi-speedometer2"></i>
+                            Dashboard
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="bi bi-bag"></i>
+                            Orders
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="bi bi-box-seam"></i>
+                            Products
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="bi bi-bar-chart"></i>
+                            Sales Report
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="/admin/users/allUsers">
+                            <i class="bi bi-people"></i>
+                            Customers
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="bi bi-ticket-perforated"></i>
+                            Coupons
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/admin/category">
+                            <i class="bi bi-grid"></i>
+                            Categories
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="bi bi-arrow-counterclockwise"></i>
+                            Refund / Return
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="bi bi-image"></i>
+                            Banners
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="bi bi-person-plus"></i>
+                            Referrals
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="bi bi-tags"></i>
+                            Offers
+                        </a>
+                    </li>
+
+                    <li class="nav-item mt-auto">
+                        <a class="nav-link" href="#">
+                            <i class="bi bi-box-arrow-left"></i>
+                            Sign Out
+                        </a>
+                    </li>
+
+                </ul>
+
+            </aside>
+
+            <!-- Content -->
+
+            <main class="col-lg-10 col-md-9 py-4 px-5">
+
+                <!-- Search + Button -->
+
+                <!-- Main Content -->
+
+                <div class="container-fluid">
+
+                    <!-- Header -->
+
+                    <div class="d-flex justify-content-between align-items-center mb-5">
+
+                        <h2 class="fw-bold">
+                            Edit Product
+                        </h2>
+
+                        <button id="variantsBtn" type="button" class="btn btn-dark px-4" onclick="window.location.href='/admin/products/variants'">
+                            Variants
+                        </button>
+
+                    </div>
+
+                    <div class="row justify-content-center">
+
+                        <div class="col-lg-10">
+
+                            <form id="editProductForm">
+
+                                <!-- Product Name -->
+
+                                <div class="mb-4">
+
+                                    <label class="form-label fw-semibold">
+                                        Product Name
+                                    </label>
+
+                                    <input type="text" class="form-control" id="productName" value="T-Shirt">
+
+                                </div>
+
+                                <!-- Description -->
+
+                                <div class="mb-4">
+
+                                    <label class="form-label fw-semibold">
+                                        Product Description
+                                    </label>
+
+                                    <textarea class="form-control" id="description" rows="5"
+                                        placeholder="Write your description here..."></textarea>
+
+                                </div>
+
+                                <!-- Category -->
+
+                                <div class="mb-3">
+
+                                    <label class="form-label fw-semibold">
+                                        Category
+                                    </label>
+
+                                    <select id="categoryId" class="form-select w-50" required><option value="">Select category</option></select>
+
+                                </div>
+
+                                <div class="row mb-4">
+                                    <div class="col-md-4"><label class="form-label fw-semibold">Original Price</label><input id="originalPrice" type="number" min="0" class="form-control" required></div>
+                                    <div class="col-md-4"><label class="form-label fw-semibold">Offer Price</label><input id="offerPrice" type="number" min="0" class="form-control"></div>
+                                </div>
+
+                                <!-- Variants are managed on the dedicated Variants page -->
+
+                                <!-- Selected Categories -->
+
+                                <div class="mb-5">
+
+                                    <span class="badge border border-dark text-dark bg-white px-3 py-2">
+                                        <i class="bi bi-x-lg me-1" id="removeCategoryBtn"></i>
+                                        
+                                    </span>
+
+                                </div>
+
+                                <!-- Buttons -->
+
+                                <div class="text-center mt-5">
+
+                                    <button id="cancelProductBtn" type="button" class="btn btn-outline-dark px-5 me-4">
+                                        Cancel
+                                    </button>
+
+                                    <button type="submit" class="btn btn-dark px-5">
+                                        Save
+                                    </button>
+
+                                </div>
+
+                            </form>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- Bottom Bar -->
+
+                
+
+        </div>
+
+        <!-- Pagination -->
+
+        <nav class="mt-4">
+
+            <ul id="categoryPagination" class="pagination justify-content-center"></ul>
+
+        </nav>
+
+        </main>
+
+    </div>
+
+    </div>
+
+    <!-- Footer -->
+
+    <footer class="dashboard-footer">
+
+        © 2025 | G-ROCK | All Rights Reserved. | We Give You Style.
+
+    </footer>
+
+    <script src="/assets/js/admin/sidebar-links.js"></script>
+    <script src="/assets/js/admin/product-form.js"></script>
+
+</body>
+
+</html>

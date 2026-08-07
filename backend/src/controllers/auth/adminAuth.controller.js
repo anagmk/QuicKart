@@ -9,7 +9,7 @@ const cookieOptions = {
   httpOnly: true,
   secure: process.env.NODE_ENV === "production",
   sameSite: "lax",
-  maxAge: 60 * 60 * 1000,
+  maxAge: 3 * 24 * 60 * 60 * 1000,
   path: "/",
 };
 
@@ -46,7 +46,7 @@ export const adminLogin = async (req, res) => {
       role: admin.role,
     });
 
-    res.cookie("jwt", token, cookieOptions);
+    res.cookie("adminToken", token, cookieOptions);
 
     const safeUser = admin.toObject();
     delete safeUser.password;

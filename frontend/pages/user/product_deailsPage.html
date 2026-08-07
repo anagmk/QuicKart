@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuicKart - Product Details</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&family=Poppins:wght@400;500&family=Volkhov&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <style>
+        :root {
+            --page-bg: #fff;
+            --card-bg: #fff;
+            --text-dark: #000;
+            --text-muted: #7b7b7b;
+            --accent-red: #000;
+            --accent-blue: #000;
+            --star-gold: #f5a623;
+            --border-soft: #ddd;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            background: var(--page-bg);
+            padding: 0;
+            color: var(--text-dark);
+            font-family: var(--font-inter);
+        }
+
+        .eyebrow {
+            color: #6b625b;
+            font-size: .78rem;
+            letter-spacing: .02em;
+            margin-bottom: 10px;
+            padding-left: 6px;
+        }
+
+        .product-details-page {
+            background: var(--card-bg);
+            width: 100%;
+            margin: 0;
+            padding: 48px clamp(16px, 4vw, 64px) 20px;
+        }
+
+        /* Header */
+        .brand-logo {
+            font-size: 1.5rem;
+            font-weight: 600;
+            letter-spacing: .01em;
+        }
+
+        .header-search {
+            background: #fff;
+            border-radius: 4px;
+            border: 1px solid var(--border-soft);
+            max-width: 280px;
+        }
+
+        .header-search input {
+            border: none;
+            background: transparent;
+            font-size: .78rem;
+            outline: none;
+            width: 100%;
+            padding: 6px 10px;
+        }
+
+        .header-icons i {
+            font-size: 1rem;
+            color: var(--text-dark);
+            margin-left: 18px;
+            cursor: pointer;
+        }
+
+        /* Gallery */
+        .main-image-wrap {
+            position: relative;
+            border-radius: 4px;
+            overflow: hidden;
+            cursor: zoom-in;
+        }
+
+        .main-image-wrap img {
+            width: 100%;
+            height: 380px;
+            object-fit: cover;
+            display: block;
+            transform-origin: center;
+            transition: transform .25s ease;
+        }
+
+        .main-image-wrap:hover img,
+        .main-image-wrap:focus-within img {
+            transform: scale(1.65);
+        }
+
+        .thumb-row {
+            display: flex;
+            gap: 10px;
+            margin-top: 12px;
+        }
+
+        .thumb-row img {
+            width: 78px;
+            height: 78px;
+            object-fit: cover;
+            border-radius: 4px;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: border-color .15s ease;
+        }
+
+        .thumb-row img.active,
+        .thumb-row img:hover {
+            border-color: var(--accent-blue);
+        }
+
+        /* Right column */
+        .right-col {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .product-title {
+            font-size: 1.02rem;
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+
+        .product-category {
+            font-size: .72rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: .04em;
+            margin-bottom: 10px;
+        }
+
+        .rating-inline {
+            font-size: .78rem;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            margin-bottom: 6px;
+        }
+
+        .rating-inline .fa-star {
+            color: var(--star-gold);
+            font-size: .75rem;
+        }
+
+        .price-tag {
+            font-size: 1.15rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+
+        .size-label {
+            font-size: .72rem;
+            letter-spacing: .05em;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            text-align: center;
+        }
+
+        .size-row {
+            display: flex;
+            justify-content: center;
+        }
+
+        .size-btn {
+            width: 38px;
+            height: 34px;
+            border: 1px solid var(--border-soft);
+            background: #fff;
+            border-radius: 50%;
+            font-size: .75rem;
+            font-weight: 500;
+            margin: 0 4px;
+            color: var(--text-dark);
+            transition: all .15s ease;
+        }
+
+        .size-btn.active,
+        .size-btn:hover {
+            background: var(--text-dark);
+            color: #fff;
+            border-color: var(--text-dark);
+        }
+
+        .btn-row {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 18px;
+            flex-wrap: wrap;
+        }
+
+        .btn-wishlist,
+        .btn-cart {
+            border: none;
+            border-radius: 999px;
+            font-size: .72rem;
+            letter-spacing: .08em;
+            font-weight: 600;
+            padding: 11px 26px;
+            transition: opacity .15s ease, transform .15s ease;
+        }
+
+        .btn-wishlist {
+            background: var(--accent-red);
+            color: #fff;
+        }
+
+        .btn-cart {
+            background: var(--text-dark);
+            color: #fff;
+        }
+
+        .btn-wishlist:hover,
+        .btn-cart:hover {
+            opacity: .88;
+            color: #fff;
+            transform: translateY(-1px);
+        }
+
+        .section-heading {
+            font-size: .72rem;
+            font-weight: 600;
+            letter-spacing: .08em;
+            margin: 22px 0 10px 0;
+            text-transform: uppercase;
+            border-bottom: 1px solid var(--border-soft);
+            padding-bottom: 8px;
+            text-align: center;
+            width: 100%;
+        }
+
+        .desc-text {
+            font-size: .76rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+            text-align: center;
+        }
+
+        .desc-text ul {
+            list-style: none;
+            padding-left: 0;
+            margin-top: 8px;
+        }
+
+        .desc-text li {
+            margin-bottom: 4px;
+        }
+
+        .desc-text strong {
+            color: var(--text-dark);
+        }
+
+        /* Colour */
+        .colour-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 10px;
+            padding: 16px 0;
+            border-top: 1px solid var(--border-soft);
+            margin-top: 14px;
+        }
+
+        .colour-label {
+            font-size: .78rem;
+            font-weight: 500;
+        }
+
+        .colour-avail {
+            font-size: .72rem;
+            color: var(--text-muted);
+        }
+
+        .swatch {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 8px;
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+
+        .swatch.active {
+            border-color: var(--text-dark);
+        }
+
+        /* Reviews */
+        .review-score {
+            font-size: 2.2rem;
+            font-weight: 700;
+            line-height: 1;
+        }
+
+        .review-stars i {
+            color: var(--star-gold);
+            font-size: .85rem;
+        }
+
+        .review-sub {
+            font-size: .7rem;
+            color: var(--text-muted);
+        }
+
+        .bar-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 5px;
+        }
+
+        .bar-track {
+            height: 5px;
+            background: #e3ddd6;
+            border-radius: 3px;
+            flex: 1;
+            overflow: hidden;
+        }
+
+        .bar-fill {
+            height: 100%;
+            background: var(--star-gold);
+        }
+
+        .bar-pct {
+            font-size: .68rem;
+            color: var(--text-muted);
+            width: 32px;
+            text-align: right;
+        }
+
+        .reviewer {
+            display: flex;
+            gap: 12px;
+            margin-top: 16px;
+        }
+
+        .reviewer img {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .reviewer-name {
+            font-size: .8rem;
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+
+        .reviewer-text {
+            font-size: .74rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        .view-more {
+            font-size: .72rem;
+            color: var(--text-dark);
+            font-weight: 600;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+
+        /* Related products */
+        .related-title {
+            font-size: .85rem;
+            font-weight: 600;
+            margin: 26px 0 14px 0;
+        }
+
+        .related-card img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 4px;
+            margin-bottom: 8px;
+        }
+
+        .related-name {
+            font-size: .76rem;
+            font-weight: 500;
+            margin-bottom: 2px;
+        }
+
+        .related-fit {
+            font-size: .68rem;
+            color: var(--text-muted);
+            margin-bottom: 2px;
+        }
+
+        .related-price {
+            font-size: .76rem;
+            font-weight: 600;
+        }
+
+        /* Matches the Shop footer's local page rule. */
+        .footer-logo {
+            font-size: 26px;
+        }
+
+        /* Footer */
+        .site-footer {
+            background: #e5e1db;
+            margin: 0 -32px;
+            padding: 28px 32px;
+            margin-top: 30px;
+            border-radius: 0 0 6px 6px;
+        }
+
+        .footer-brand {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .footer-heading {
+            font-size: .75rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .footer-links {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .footer-links li {
+            font-size: .72rem;
+            color: var(--text-muted);
+            margin-bottom: 6px;
+        }
+
+        .newsletter-input {
+            border: 1px solid var(--border-soft);
+            border-radius: 999px 0 0 999px;
+            font-size: .72rem;
+            padding: 7px 14px;
+            border-right: none;
+            outline: none;
+        }
+
+        .newsletter-btn {
+            border-radius: 0 999px 999px 0;
+            background: var(--text-dark);
+            color: #fff;
+            border: none;
+            font-size: .75rem;
+            padding: 0 16px;
+        }
+
+        .social-icons i {
+            margin-right: 14px;
+            font-size: .9rem;
+            color: var(--text-dark);
+        }
+
+        @media (max-width:767px) {
+            .product-details-page {
+                padding: 28px 16px 12px;
+            }
+
+            .site-footer {
+                margin: 0 -16px;
+                padding: 22px 16px;
+                margin-top: 24px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+
+    <!-- NAVBAR: shared with shop.html -->
+    <nav class="qk-navbar">
+            <div class="container d-flex flex-wrap align-items-center justify-content-between">
+                <span class="logo">QuicKart</span>
+
+                <div class="d-none d-lg-flex align-items-center">
+
+                </div>
+
+                <div class="d-flex align-items-center gap-3">
+                    <div class="search-pill d-none d-md-flex">
+                        <span class="material-icons search-icon">search</span>
+                        <input id="productSearch" type="text" placeholder="Search products">
+                    </div>
+                    <div class="qk-icons">
+                        <a href="/user/wishlist"><span class="material-icons">favorite_border</span></a>
+                        <a href="/user/profile"><span class="material-icons">account_circle</span></a>
+                        <a href="/user/cart"><span class="material-icons">shopping_bag</span></a>
+                    </div>
+                </div>
+            </div>
+    </nav>
+
+    <main class="product-details-page">
+        <nav id="productBreadcrumb" class="eyebrow" aria-label="Breadcrumb"></nav>
+        <div class="row g-5">
+            <!-- Left: Gallery + Colour + Related -->
+            <div class="col-md-6 mb-4">
+                <div id="mainImageWrap" class="main-image-wrap">
+                    <img id="mainImage" alt="Product image">
+                </div>
+                <div id="productThumbnails" class="thumb-row"></div>
+
+                <!-- Colour -->
+                <div class="colour-row">
+                    <div>
+                        <span class="colour-label">Colour: <span id="colourName">—</span></span>
+                    </div>
+                    <div class="d-flex align-items-center flex-wrap">
+                        <span id="colourAvailability" class="colour-avail me-3"></span>
+                        <div id="colourOptions" class="d-flex align-items-center flex-wrap"></div>
+                    </div>
+                </div>
+
+                <!-- Related Products -->
+                <div class="related-title">Related Products</div>
+                <div id="relatedProducts" class="row mb-2"></div>
+            </div>
+
+            <!-- Right: Details + Description + Reviews -->
+            <div class="col-md-6 mb-4 right-col">
+                <div id="productName" class="product-title"></div>
+                <div id="productCategory" class="product-category"></div>
+                <div id="productRating" class="rating-inline" hidden>
+                    <span id="ratingStars"></span><span id="ratingText"></span>
+                </div>
+                <div id="productPrice" class="price-tag"></div>
+                <div id="originalPrice" class="review-sub mb-1" hidden></div>
+                <div id="discountBadge" class="review-sub mb-2" hidden></div>
+                <div id="stockStatus" class="review-sub mb-2"></div>
+                <div id="variantSku" class="review-sub mb-2" hidden></div>
+
+                <div class="size-label">Select a size</div>
+                <div id="sizeOptions" class="size-row mb-2"></div>
+
+                <div class="btn-row">
+                    <button id="wishlistButton" class="btn-wishlist"><i class="fa-regular fa-heart me-1"></i> ADD TO WISHLIST</button>
+                    <button id="cartButton" class="btn-cart"><i class="fa-solid fa-cart-shopping me-1"></i> ADD TO CART</button>
+                </div>
+
+                <div class="section-heading">Description</div>
+                <div id="productDescription" class="desc-text"></div>
+
+                <section id="offersSection" hidden>
+                    <div class="section-heading">Offers</div>
+                    <div id="productOffers" class="desc-text"></div>
+                </section>
+
+                <section id="highlightsSection" hidden>
+                    <div class="section-heading">Product Highlights</div>
+                    <ul id="productHighlights" class="desc-text mb-0"></ul>
+                </section>
+
+                <div id="fitHeading" class="section-heading">Size &amp; Fit</div>
+                <div id="productFit" class="desc-text"></div>
+
+                <div id="materialHeading" class="section-heading">Materials &amp; Care</div>
+                <div id="productMaterial" class="desc-text"></div>
+
+                <!-- Reviews are shown only when the API supplies review data. -->
+                <section id="reviewsSection" hidden>
+                <div class="section-heading">Review</div>
+                <div class="review-score">4.8</div>
+                <div class="review-stars mb-1">
+                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                        class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i>
+                </div>
+                <div class="review-sub mb-3">Product Rating</div>
+
+                <div class="w-100">
+                    <div class="bar-row"><span class="review-sub" style="width:14px;">5</span>
+                        <div class="bar-track">
+                            <div class="bar-fill" style="width:75%;"></div>
+                        </div><span class="bar-pct">75%</span>
+                    </div>
+                    <div class="bar-row"><span class="review-sub" style="width:14px;">4</span>
+                        <div class="bar-track">
+                            <div class="bar-fill" style="width:16%;"></div>
+                        </div><span class="bar-pct">16%</span>
+                    </div>
+                    <div class="bar-row"><span class="review-sub" style="width:14px;">3</span>
+                        <div class="bar-track">
+                            <div class="bar-fill" style="width:19%;"></div>
+                        </div><span class="bar-pct">19%</span>
+                    </div>
+                    <div class="bar-row"><span class="review-sub" style="width:14px;">2</span>
+                        <div class="bar-track">
+                            <div class="bar-fill" style="width:3%;"></div>
+                        </div><span class="bar-pct">3%</span>
+                    </div>
+                    <div class="bar-row"><span class="review-sub" style="width:14px;">1</span>
+                        <div class="bar-track">
+                            <div class="bar-fill" style="width:2%;"></div>
+                        </div><span class="bar-pct">2%</span>
+                    </div>
+                </div>
+
+                <div class="reviewer text-start w-100">
+                    <img src="https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=100&q=80" alt="Rimma">
+                    <div>
+                        <div class="reviewer-name">Rimma</div>
+                        <div class="review-stars mb-1" style="justify-content:flex-start;"><i
+                                class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                                class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                                class="fa-solid fa-star"></i></div>
+                        <div class="reviewer-text">Absolutely stunning work and good looking. Have work so far till.
+                            Fresh again!</div>
+                    </div>
+                </div>
+                <div class="reviewer text-start w-100">
+                    <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=100&q=80" alt="Riza">
+                    <div>
+                        <div class="reviewer-name">Riza</div>
+                        <div class="review-stars mb-1" style="justify-content:flex-start;"><i
+                                class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                                class="fa-solid fa-star"></i></div>
+                        <div class="reviewer-text">The product is so good. Perfect match for a casual meet.</div>
+                    </div>
+                </div>
+
+                <div class="text-end w-100 my-3">
+                    <span class="view-more">VIEW MORE</span>
+                </div>
+                </section>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- FOOTER: shared with shop.html -->
+
+        <footer class="mt-5">
+
+            <div class="container">
+
+                <div class="row gy-4">
+
+                    <div class="col-md-3">
+
+                        <span class="logo footer-logo">
+                            QuicKart
+                        </span>
+
+                    </div>
+
+                    <div class="col-md-3">
+
+                        <h6>Info</h6>
+
+                        <a href="#">Contact us</a><br>
+
+                        <a href="#">About us</a>
+
+                    </div>
+
+                    <div class="col-md-3">
+
+                        <h6>Policies</h6>
+
+                        <a href="#">Privacy Notice</a><br>
+
+                        <a href="#">Return Policy</a><br>
+
+                        <a href="#">Terms & Conditions</a><br>
+
+                        <a href="#">Cookie Policy</a>
+
+                    </div>
+
+                    <div class="col-md-3">
+
+                        <h6>Subscribe to Our Newsletter</h6>
+
+                        <div class="newsletter-box mb-3">
+
+                            <input class="form-control" type="email" placeholder="Email Address">
+
+                        </div>
+
+                        <div class="d-flex gap-3">
+
+                            <span class="material-icons">photo_camera</span>
+
+                            <span class="material-icons">facebook</span>
+
+                            <span class="material-icons">alternate_email</span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <hr>
+
+                <div class="text-center py-3">
+
+                    © 2026 | QuicKart | All Rights Reserved.
+
+                </div>
+
+            </div>
+
+        </footer>
+
+    <script src="../../assets/js/user/product-details.js"></script>
+
+</body>
+
+</html>

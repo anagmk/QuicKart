@@ -19,6 +19,15 @@ router.get("/dashboard", (_req, res) => {
   );
 });
 
+["orders", "sales-report", "coupons", "returns", "banners", "referrals", "offers"].forEach((section) => {
+  router.get(`/${section}`, (_req, res) => res.redirect("/admin/dashboard"));
+});
+
+router.get("/logout", (_req, res) => {
+  res.clearCookie("adminToken");
+  res.redirect("/admin/login");
+});
+
 router.post("/login", adminLogin);
 
 export default router;

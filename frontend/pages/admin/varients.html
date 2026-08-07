@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>QuickKart Categories</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cropperjs@1.6.2/dist/cropper.min.css">
+
+    <link rel="stylesheet" href="/assets/css/admin-dashboard.css">
+</head>
+
+<body>
+
+    <!-- Header -->
+
+    <header class="dashboard-header">
+
+        <h1 class="logo">
+            QuicKart
+        </h1>
+
+        <div class="profile">
+            <i class="bi bi-person-circle"></i>
+        </div>
+
+    </header>
+
+    <!-- Main Layout -->
+
+    <div class="container-fluid">
+
+        <div class="row">
+
+            <!-- Sidebar -->
+
+            <aside class="col-lg-2 col-md-3 sidebar">
+
+                <ul class="nav flex-column">
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="bi bi-speedometer2"></i>
+                            Dashboard
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="bi bi-bag"></i>
+                            Orders
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="bi bi-box-seam"></i>
+                            Products
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="bi bi-bar-chart"></i>
+                            Sales Report
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="/admin/users/allUsers">
+                            <i class="bi bi-people"></i>
+                            Customers
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="bi bi-ticket-perforated"></i>
+                            Coupons
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/admin/category">
+                            <i class="bi bi-grid"></i>
+                            Categories
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="bi bi-arrow-counterclockwise"></i>
+                            Refund / Return
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="bi bi-image"></i>
+                            Banners
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="bi bi-person-plus"></i>
+                            Referrals
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="bi bi-tags"></i>
+                            Offers
+                        </a>
+                    </li>
+
+                    <li class="nav-item mt-auto">
+                        <a class="nav-link" href="#">
+                            <i class="bi bi-box-arrow-left"></i>
+                            Sign Out
+                        </a>
+                    </li>
+
+                </ul>
+
+            </aside>
+
+            <!-- Content -->
+
+            <main class="col-lg-10 col-md-9 py-4 px-5">
+
+                <!-- Main Content -->
+
+                <!-- Main Content -->
+
+                <div class="container-fluid">
+
+                    <!-- Page Header -->
+
+                    <div class="d-flex justify-content-between align-items-center mb-5">
+
+                        <h2 class="fw-bold">
+                            Varients
+                        </h2>
+
+                    </div>
+
+                    <form id="variantForm">
+
+                        <!-- Image Upload -->
+
+                        <div class="mb-5">
+
+                            <label class="form-label fw-semibold mb-3">
+                                Edit Photos
+                            </label>
+
+                            <div class="border rounded-3 p-4">
+
+                                <input id="variantImages" type="file" accept="image/jpeg,image/png,image/webp" class="d-none">
+                                <div class="row justify-content-center g-4">
+                                    <div class="col-md-3"><div id="imageSlot0" class="border border-2 border-secondary-subtle rounded-3 p-4 text-center"><i class="bi bi-image fs-1 text-primary"></i><div class="mt-3"><button type="button" class="btn btn-outline-primary btn-sm image-select-btn" data-slot="0">Add Image</button></div></div></div>
+                                    <div class="col-md-3"><div id="imageSlot1" class="border border-2 border-secondary-subtle rounded-3 p-4 text-center"><i class="bi bi-image fs-1 text-primary"></i><div class="mt-3"><button type="button" class="btn btn-outline-primary btn-sm image-select-btn" data-slot="1">Add Image</button></div></div></div>
+                                    <div class="col-md-3"><div id="imageSlot2" class="border border-2 border-secondary-subtle rounded-3 p-4 text-center"><i class="bi bi-image fs-1 text-primary"></i><div class="mt-3"><button type="button" class="btn btn-outline-primary btn-sm image-select-btn" data-slot="2">Add Image</button></div></div></div>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <!-- Price & Description -->
+
+                        <div class="row mb-4">
+
+                            <div class="col-md-4">
+
+                                <label class="form-label fw-semibold">
+                                    Base Price
+                                </label>
+
+                                <input id="variantOriginalPrice" type="number" min="0" class="form-control" required>
+
+                            </div>
+
+                            <div class="col-md-4">
+
+                                <label class="form-label fw-semibold">
+                                    Discount Price
+                                </label>
+
+                                <input id="variantOfferPrice" type="number" min="0" class="form-control" placeholder="Enter discount price">
+
+                            </div>
+
+                            <div class="col-md-4">
+
+                                <label class="form-label fw-semibold">
+                                    Description
+                                </label>
+
+                                <input id="variantDescription" type="text" class="form-control">
+
+                            </div>
+
+                        </div>
+
+                        <!-- Dropdowns -->
+
+                        <div class="row mb-5">
+
+                            <div class="col-md-3">
+
+                                <select id="variantColor" class="form-select" required>
+
+                                    <option value="" selected>Colour</option>
+
+                                    <option>Black</option>
+                                    <option>White</option>
+                                    <option>Blue</option>
+
+                                </select>
+
+                            </div>
+
+                            <div class="col-md-3">
+
+                                <select id="variantSize" class="form-select" required>
+
+                                    <option value="" selected>Size</option>
+
+                                    <option>S</option>
+                                    <option>M</option>
+                                    <option>L</option>
+                                    <option>XL</option>
+
+                                </select>
+
+                            </div>
+
+                        </div>
+
+                        <div class="mb-4"><label class="form-label fw-semibold">Stock</label><input id="variantStock" type="number" min="0" class="form-control" required></div>
+                        <div id="variantError" class="text-danger small mb-3" role="alert"></div>
+
+                        <!-- Buttons -->
+
+                        <div class="text-center mt-5">
+
+                            <button id="cancelVariantBtn" type="button" class="btn btn-outline-dark px-5 me-4">
+
+                                Cancel
+
+                            </button>
+
+                            <button type="submit" class="btn btn-dark px-5">
+
+                                <i class="bi bi-floppy me-2"></i>
+
+                                Save
+
+                            </button>
+
+                        </div>
+
+                    </form>
+                    <div class="mt-5"><h4>Saved Variants</h4><div id="variantList" class="list-group"></div></div>
+
+                </div>
+
+                <!-- Bottom Bar -->
+
+
+
+        </div>
+
+        <!-- Pagination -->
+
+        <nav class="mt-4">
+
+            <ul id="categoryPagination" class="pagination justify-content-center"></ul>
+
+        </nav>
+
+        </main>
+
+    </div>
+
+    </div>
+
+    <!-- Footer -->
+
+    <footer class="dashboard-footer">
+
+        © 2025 | G-ROCK | All Rights Reserved. | We Give You Style.
+
+    </footer>
+
+    <dialog id="cropDialog" class="border rounded shadow p-3" style="max-width:min(90vw,700px)">
+        <h5>Crop image</h5>
+        <img id="cropImage" alt="Crop preview" style="display:block;max-height:60vh;max-width:100%">
+        <div class="text-end mt-3"><button id="cancelCropBtn" type="button" class="btn btn-outline-secondary me-2">Skip</button><button id="applyCropBtn" type="button" class="btn btn-dark">Apply crop</button></div>
+    </dialog>
+
+    <script src="https://cdn.jsdelivr.net/npm/cropperjs@1.6.2/dist/cropper.min.js"></script>
+    <script src="/assets/js/admin/sidebar-links.js"></script>
+    <script src="/assets/js/admin/variants.js"></script>
+
+</body>
+
+</html>

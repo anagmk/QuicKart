@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>QuickKart Dashboard</title>
+    <title>QuickKart Categories</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
 
@@ -17,6 +17,7 @@
 
 <body>
 
+    <!-- Header -->
 
     <header class="dashboard-header">
 
@@ -25,14 +26,12 @@
         </h1>
 
         <div class="profile">
-
             <i class="bi bi-person-circle"></i>
-
         </div>
 
     </header>
 
-    <!-- Body -->
+    <!-- Main Layout -->
 
     <div class="container-fluid">
 
@@ -40,12 +39,12 @@
 
             <!-- Sidebar -->
 
-            <aside class="col-lg-2 sidebar">
+            <aside class="col-lg-2 col-md-3 sidebar">
 
                 <ul class="nav flex-column">
 
                     <li class="nav-item">
-                        <a class="nav-link active" href="#">
+                        <a class="nav-link" href="#">
                             <i class="bi bi-speedometer2"></i>
                             Dashboard
                         </a>
@@ -59,7 +58,7 @@
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="/admin/products">
                             <i class="bi bi-box-seam"></i>
                             Products
                         </a>
@@ -87,7 +86,7 @@
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="/admin/category">
+                        <a class="nav-link active" href="/admin/category">
                             <i class="bi bi-grid"></i>
                             Categories
                         </a>
@@ -134,15 +133,79 @@
 
             <!-- Content -->
 
-            <main class="col-lg-10 content-area">
+            <main class="col-lg-10 col-md-9 py-4 px-5">
 
-                <h3>Dashboard</h3>
+                <!-- Search + Button -->
 
-                <div class="content-placeholder">
+                <div class="d-flex justify-content-between align-items-center mb-4">
 
-                    Your page content goes here...
+                    <h2 class="fw-bold mb-0">
+                        Categories
+                    </h2>
+
+                    <div class="d-flex">
+
+                        <div class="input-group me-3" style="width:300px;">
+
+                            <span class="input-group-text bg-white">
+                                <i class="bi bi-search"></i>
+                            </span>
+
+                            <input id="categorySearch" type="text"
+                                class="form-control"
+                                placeholder="Search here">
+
+                        </div>
+
+                        <button id="addCategoryBtn" class="btn btn-dark">
+                            Add Category
+                        </button>
+
+                    </div>
 
                 </div>
+
+                <!-- Table -->
+
+                <div class="card shadow-sm">
+
+                    <div class="table-responsive">
+
+                        <table class="table table-hover align-middle mb-0">
+
+                            <thead class="table-light">
+
+                                <tr>
+
+                                    <th width="80">No.</th>
+
+                                    <th>Product Type</th>
+
+                                    <th>Status</th>
+
+                                    <th width="250" class="text-center">
+                                        Action
+                                    </th>
+
+                                </tr>
+
+                            </thead>
+
+                            <tbody id="categoryTable"></tbody>
+
+                        </table>
+
+                    </div>
+
+                </div>
+
+                <!-- Pagination -->
+
+                <nav class="mt-4">
+
+                    <ul id="categoryPagination" class="pagination justify-content-center"></ul>
+
+                </nav>
 
             </main>
 
@@ -157,7 +220,9 @@
         © 2025 | G-ROCK | All Rights Reserved. | We Give You Style.
 
     </footer>
+
     <script src="/assets/js/admin/sidebar-links.js"></script>
+    <script src="../../assets/js/admin/category.js"></script>
 
 </body>
 

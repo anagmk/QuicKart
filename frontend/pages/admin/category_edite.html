@@ -5,18 +5,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>QuickKart Dashboard</title>
+    <title id="pageTitle">Category | QuickKart</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css">
 
-    <link rel="stylesheet" href="../../assets/css/admin-dashboard.css">
+    <link rel="stylesheet" href="/assets/css/admin-dashboard.css">
 </head>
 
 <body>
 
+    <!-- Header -->
 
     <header class="dashboard-header">
 
@@ -25,14 +26,12 @@
         </h1>
 
         <div class="profile">
-
             <i class="bi bi-person-circle"></i>
-
         </div>
 
     </header>
 
-    <!-- Body -->
+    <!-- Main Layout -->
 
     <div class="container-fluid">
 
@@ -40,12 +39,12 @@
 
             <!-- Sidebar -->
 
-            <aside class="col-lg-2 sidebar">
+            <aside class="col-lg-2 col-md-3 sidebar">
 
                 <ul class="nav flex-column">
 
                     <li class="nav-item">
-                        <a class="nav-link active" href="#">
+                        <a class="nav-link" href="#">
                             <i class="bi bi-speedometer2"></i>
                             Dashboard
                         </a>
@@ -87,7 +86,7 @@
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="/admin/category">
+                        <a class="nav-link active" href="/admin/category">
                             <i class="bi bi-grid"></i>
                             Categories
                         </a>
@@ -134,13 +133,91 @@
 
             <!-- Content -->
 
-            <main class="col-lg-10 content-area">
+            <main class="col-lg-10 col-md-9 py-4 px-5">
 
-                <h3>Dashboard</h3>
+                <!-- Search + Button -->
 
-                <div class="content-placeholder">
+                <div class="d-flex justify-content-between align-items-center mb-4">
 
-                    Your page content goes here...
+                    <h2 class="fw-bold mb-0">
+                        Categories
+                    </h2>
+
+                    <div class="d-flex">
+
+                        <div class="input-group me-3" style="width:300px;">
+
+                            <span class="input-group-text bg-white">
+                                <i class="bi bi-search"></i>
+                            </span>
+
+                            <input type="text" class="form-control" placeholder="Search here">
+
+                        </div>
+
+                        <a class="btn btn-dark" href="/admin/category">
+                            All Categories
+                        </a>
+
+                    </div>
+
+                </div>
+
+                <!-- Table -->
+
+                <!-- Main Content -->
+
+                <div class="container-fluid">
+
+                    <h2 id="formTitle" class="text-center fw-bold mb-4">
+                        Category
+                    </h2>
+
+                    <div class="row justify-content-center">
+
+                        <div class="col-lg-8">
+
+                            <div class="card shadow-sm rounded-4">
+
+                                <div class="card-body p-4">
+
+                                    <form id="editCategoryForm" novalidate>
+
+                                        <div class="mb-4">
+
+                                            <label class="form-label fw-semibold">
+                                                Category Name
+                                            </label>
+
+                                            <input id="categoryName" type="text" class="form-control"
+                                                name="categoryName" placeholder="Category Name" required>
+
+                                            <div id="formError" class="invalid-feedback"></div>
+
+                                        </div>
+
+                                        <div class="text-center mt-5">
+
+                                            <button id="cancelEditBtn" type="button"
+                                                class="btn btn-outline-secondary px-4 me-3">
+                                                Cancel
+                                            </button>
+
+                                            <button type="submit" class="btn btn-dark px-5">
+                                                Save
+                                            </button>
+
+                                        </div>
+
+                                    </form>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
 
                 </div>
 
@@ -157,7 +234,9 @@
         © 2025 | G-ROCK | All Rights Reserved. | We Give You Style.
 
     </footer>
+
     <script src="/assets/js/admin/sidebar-links.js"></script>
+    <script src="/assets/js/admin/category-edit.js"></script>
 
 </body>
 

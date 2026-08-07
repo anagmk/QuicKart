@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>QuickKart Categories</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css">
+
+    <link rel="stylesheet" href="../../assets/css/admin-dashboard.css">
+</head>
+
+<body>
+
+    <!-- Header -->
+
+    <header class="dashboard-header">
+
+        <h1 class="logo">
+            QuicKart
+        </h1>
+
+        <div class="profile">
+            <i class="bi bi-person-circle"></i>
+        </div>
+
+    </header>
+
+    <!-- Main Layout -->
+
+    <div class="container-fluid">
+
+        <div class="row">
+
+            <!-- Sidebar -->
+
+            <aside class="col-lg-2 col-md-3 sidebar">
+
+                <ul class="nav flex-column">
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="bi bi-speedometer2"></i>
+                            Dashboard
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="bi bi-bag"></i>
+                            Orders
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="bi bi-box-seam"></i>
+                            Products
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="bi bi-bar-chart"></i>
+                            Sales Report
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="/admin/users/allUsers">
+                            <i class="bi bi-people"></i>
+                            Customers
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="bi bi-ticket-perforated"></i>
+                            Coupons
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/admin/category">
+                            <i class="bi bi-grid"></i>
+                            Categories
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="bi bi-arrow-counterclockwise"></i>
+                            Refund / Return
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="bi bi-image"></i>
+                            Banners
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="bi bi-person-plus"></i>
+                            Referrals
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="bi bi-tags"></i>
+                            Offers
+                        </a>
+                    </li>
+
+                    <li class="nav-item mt-auto">
+                        <a class="nav-link" href="#">
+                            <i class="bi bi-box-arrow-left"></i>
+                            Sign Out
+                        </a>
+                    </li>
+
+                </ul>
+
+            </aside>
+
+            <!-- Content -->
+
+            <main class="col-lg-10 col-md-9 py-4 px-5">
+
+                <!-- Search + Button -->
+
+                <!-- Main Content -->
+
+                <div class="container-fluid">
+
+                    <!-- Top Bar -->
+
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+
+                        <h3 class="fw-bold mb-0">
+                            Products Management
+                        </h3>
+
+                        <div class="d-flex align-items-center gap-2">
+
+                            <div class="input-group" style="width:280px;">
+
+                                <span class="input-group-text bg-white border-end-0">
+                                    <i class="bi bi-search"></i>
+                                </span>
+
+                            <input id="productSearch" type="text" class="form-control border-start-0" placeholder="Search here">
+
+                            </div>
+
+                            <button id="addProductBtn" class="btn btn-dark">
+                                <i class="bi bi-plus-circle me-1"></i>
+                                New
+                            </button>
+
+                            <button class="btn btn-outline-secondary">
+                                Filters
+                                <i class="bi bi-sliders ms-1"></i>
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                    <!-- Product Table -->
+
+                    <div class="card shadow-sm border-0">
+
+                        <div class="table-responsive">
+
+                            <table class="table table-hover align-middle mb-0">
+
+                                <thead class="table-dark">
+
+                                    <tr>
+
+                                        <th>Product</th>
+                                        <th>Product ID</th>
+                                        <th>Price</th>
+                                        <th>Category</th>
+                                        <th>Stock</th>
+                                        <th>Added On</th>
+                                        <th class="text-center">Actions</th>
+
+                                    </tr>
+
+                                </thead>
+
+                            <tbody id="productTable">
+
+                                    <tr>
+                                        <td>Hannya Goddess</td>
+                                        <td class="text-primary small">BS6FXA5E</td>
+                                        <td>$50</td>
+                                        <td>T-Shirts</td>
+                                        <td>40</td>
+                                        <td>01-04-2025</td>
+                                        <td class="text-center">
+                                            <i class="bi bi-pencil me-2"></i>
+                                            <i class="bi bi-eye me-2"></i>
+                                            <i class="bi bi-trash"></i>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>Anime Legends</td>
+                                        <td class="text-primary small">BS6FXB5T</td>
+                                        <td>$90</td>
+                                        <td>Jacket</td>
+                                        <td>40</td>
+                                        <td>01-04-2025</td>
+                                        <td class="text-center">
+                                            <i class="bi bi-pencil me-2"></i>
+                                            <i class="bi bi-eye me-2"></i>
+                                            <i class="bi bi-trash"></i>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>Luffy's Mouse</td>
+                                        <td class="text-primary small">BS6FXC2K</td>
+                                        <td>$60</td>
+                                        <td>T-Shirts</td>
+                                        <td>40</td>
+                                        <td>01-04-2025</td>
+                                        <td class="text-center">
+                                            <i class="bi bi-pencil me-2"></i>
+                                            <i class="bi bi-eye me-2"></i>
+                                            <i class="bi bi-trash"></i>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>Anime Legends</td>
+                                        <td class="text-primary small">BS6FXD2D</td>
+                                        <td>$50</td>
+                                        <td>T-Shirts</td>
+                                        <td>40</td>
+                                        <td>01-04-2025</td>
+                                        <td class="text-center">
+                                            <i class="bi bi-pencil me-2"></i>
+                                            <i class="bi bi-eye me-2"></i>
+                                            <i class="bi bi-trash"></i>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>Anime Legend</td>
+                                        <td class="text-primary small">BS6FXABQ</td>
+                                        <td>$100</td>
+                                        <td>Jacket</td>
+                                        <td>40</td>
+                                        <td>01-04-2025</td>
+                                        <td class="text-center">
+                                            <i class="bi bi-pencil me-2"></i>
+                                            <i class="bi bi-eye me-2"></i>
+                                            <i class="bi bi-trash"></i>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>Anime Legends</td>
+                                        <td class="text-primary small">BS6FXV5E</td>
+                                        <td>$80</td>
+                                        <td>Jeans</td>
+                                        <td>40</td>
+                                        <td>01-04-2025</td>
+                                        <td class="text-center">
+                                            <i class="bi bi-pencil me-2"></i>
+                                            <i class="bi bi-eye me-2"></i>
+                                            <i class="bi bi-trash"></i>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>Hannya Godde</td>
+                                        <td class="text-primary small">BS6FXB8P</td>
+                                        <td>$65</td>
+                                        <td>T-Shirts</td>
+                                        <td>40</td>
+                                        <td>01-04-2025</td>
+                                        <td class="text-center">
+                                            <i class="bi bi-pencil me-2"></i>
+                                            <i class="bi bi-eye me-2"></i>
+                                            <i class="bi bi-trash"></i>
+                                        </td>
+                                    </tr>
+
+                                </tbody>
+
+                            </table>
+
+                        </div>
+
+                    </div>
+
+                    <!-- Bottom Bar -->
+
+                    <div class="d-flex justify-content-between align-items-center mt-4">
+
+                        <div>
+
+                            <label class="me-2 small">Show Result:</label>
+
+                            <select class="form-select d-inline-block w-auto form-select-sm">
+                                <option>10</option>
+                                <option>20</option>
+                                <option>50</option>
+                            </select>
+
+                        </div>
+
+                        <nav>
+
+                            <ul class="pagination pagination-sm mb-0">
+
+                                <li class="page-item disabled">
+                                    <a class="page-link">&laquo;</a>
+                                </li>
+
+                                <li class="page-item active">
+                                    <a class="page-link">1</a>
+                                </li>
+
+                                <li class="page-item">
+                                    <a class="page-link">2</a>
+                                </li>
+
+                                <li class="page-item">
+                                    <a class="page-link">3</a>
+                                </li>
+
+                                <li class="page-item">
+                                    <a class="page-link">4</a>
+                                </li>
+
+                                <li class="page-item">
+                                    <a class="page-link">20</a>
+                                </li>
+
+                                <li class="page-item">
+                                    <a class="page-link">&raquo;</a>
+                                </li>
+
+                            </ul>
+
+                        </nav>
+
+                    </div>
+
+                </div>
+
+                <!-- Pagination -->
+
+                <nav class="mt-4">
+
+                    <ul id="categoryPagination" class="pagination justify-content-center"></ul>
+
+                </nav>
+
+            </main>
+
+        </div>
+
+    </div>
+
+    <!-- Footer -->
+
+    <footer class="dashboard-footer">
+
+        © 2025 | G-ROCK | All Rights Reserved. | We Give You Style.
+
+    </footer>
+
+    <script src="/assets/js/admin/sidebar-links.js"></script>
+    <script src="/assets/js/admin/products.js"></script>
+
+</body>
+
+</html>

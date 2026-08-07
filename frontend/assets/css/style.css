@@ -152,6 +152,14 @@
     object-fit:cover;
     transition: transform .35s ease;
   }
+  .product-placeholder{
+    display:grid;
+    place-items:center;
+    height:100%;
+    color:#777;
+    font-size:42px;
+  }
+  .shop-product-card{ cursor:pointer; }
   .product-card:hover .card-img-wrap img{
     transform: scale(1.05);
   }
